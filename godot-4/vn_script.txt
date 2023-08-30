@@ -1,0 +1,244 @@
+@chapter intro
+@hide lambs
+@anim camera_idle
+
+en=Henlo! I'm a sheep. And apparently I can speak human.
+da=Hejsa! Jeg er et får. Og det lader til jeg kan menneskesprog.
+es=¡Buenas! Soy una oveja. Y parece que hablo la lengua humana.
+
+en=Other sheep just say "ba-a-ah", I can also say "blah blah blah".
+da=Andre får siger bare "mæ-æ-æh", jeg kan også sige "bla bla bla".
+es=Otras ovejas dicen "ba-a-ah", you también puedo decir "bla bla bla".
+
+en=Let me taste the grass...
+da=Lad mig lige smage på græsset...
+es=A ver cómo está la hierba...
+
+@anim camera_chomp
+
+en=Chomp! Pretty nice. I get why humans like touching grass.
+da=Mums! Det er dejligt! Jeg kan godt forstå at mennesker spiser græs. Eller drikker de det? Hvad bruger man græskar til?
+es=¡Um, deliciosa! Tiene sentido que los humanos dicen "hierba buena".
+
+@chapter song
+@anim camera_idle
+en=There's birds that sing,
+   and joy they bring.
+da=Der' fuglesang
+   med glædesklang.
+es=Se oye el son
+   de un gorrión.
+
+@rem la traducción española me chirría un poco
+@rem porque añade sílabas
+en=The flowers bloom,
+   the sheep have lambs in womb,
+   I know that it is spring.
+da=Og blomster gror,
+   som lam i deres mor,
+   når forår er igang.
+es=y campos con
+   ovejas y un montón
+   de flores en esta estación.
+
+en=The fields are green,
+   the air is clean.
+da=Der' grønt på gren,
+   og luften ren.
+es=El pasto está
+   verde acá.
+
+
+en=Sometimes I sneeze
+   while watching flying geese
+   and also flying bees.
+da=Jeg nyser dog,
+   men fryser ikke, og
+   der' fugle hele dag'n.
+es=El aire aquí
+   es puro, aun así
+   hay polen que tos da.
+
+en=There's trees around
+   us and I've found
+da=Her' mange træer,
+   og også bær,
+es=Hay un lugar
+   que puedo estar,
+
+en=shade on the ground,
+   it's where the trees abound.
+   And here my song should sound.
+da=her' skygge her,
+   hvad ku' jeg ønske mer'?
+   At synge hvor jeg er.
+es=en sombra hoy
+   y es donde estoy
+   y se oye esta canción.
+
+@chapter cottages
+@anim camera_idle
+en=Perhaps I should actually walk over to the wood and sing there.
+da=Måske skal jeg gå over mellem træerne og synge der.
+es=Tal vez debería ir a la arboleda y cantar ahí.
+
+en=There's also little cottages that look sorta like dog houses, but a bit bigger.
+da=Der er også små hytter der godt kan ligne hundehuse, men er større.
+es=También hay casetas como las de los perros pero un poco más grandes.
+
+en=Sometimes humans put us into them.
+da=Nogle gange lukker meneskerne os inde i dem.
+es=A veces los humanos nos meten en ellas.
+
+
+@chapter napping
+@anim camera_idle
+en=And now that I've eaten, I could want a nap.
+da=Og nu hvor jeg har spist, kunne jeg godt finde på at tage en morfar.
+es=Y ahora que he comido me puedo tomar una siestecilla.
+
+en=I think humans sleep too. And before sleeping, they like counting sheep.
+da=Jeg tror også mennesker sover. Og før de sover kan de lide at tælle får.
+es=Creo que los seres humanos también domís. I que antes de dormir contáis ovejas.
+
+en=Apparently it helps them fall asleep. So I guess our purpose is to make people sleepy.
+da=Tilsyneladende hjælper det dem med at falde i søvn. Så jeg tror vi er her for at gøre folk søvnige.
+es=Al parecer os ayuda a dormir. O sea, que para eso estamos: para que los seres humanos os podáis dormir.
+
+en=The shepherds go here every day and count us. They want to make sure we're all here.
+da=Hyrderne kommer her hver dag og tæller os. De skal have tal på hvor mange vi er.
+es=Todos los días vienen los pastores y nos cuentan. Quieren asegurarse de que estamos aquí todas.
+
+en=Of course they can count on us being here.
+da=Og de kan godt regne med at vi er her.
+es=Claro que pueden contar con nosotras.
+
+en=Perhaps I should count humans.
+da=Måske kan jeg tælle mennesker.
+es=Y yo podría contar humanos.
+
+en=Or lambs. I don't wanna sleep when the lambs I'm lambsitting aren't here.
+da=Eller lam. Jeg vil ikke sove hvis lammene jeg passer er væk.
+es=U ovejitas. Mejor no me duermo si no están las ovejitas que tengo que cuidar.
+
+en=Their mother is sick, so I'm taking care of them.
+da=Deres mor er syg, så jeg passer på dem.
+es=Su mamá está enferma, así que de momento las cuido yo.
+
+@chapter lambs
+@show lambs
+@anim camera_down
+en=How many lambs? Two.
+da=Hvor mange lam? To.
+es=¿Cuántas ovejitas? Dos.
+
+en=They're twins by the way. Twins are common among sheep.
+da=I Øvright er de tvillinger. Det er almindeligt for lam.
+es=Por cierto, son gemelos. Para las ovejas es común tener gemelos.
+
+@anim camera_up
+en=Earlier today one of them climbed unto my back like a goat. Lambs are so cute and I like keeping them safe.
+da=Tidligere i dag kravlede et af dem op på min ryg som var det en ged. Lam er søde, og jeg passer godt på dem.
+es=Hoy mismo una de ellas se subió a mi espalda como una cabra que se sube a un tronco. Son muy cuquis.
+
+en=Perhaps I should get some too...
+da=Måske skulle jeg også selv få nogle...
+es=Quizás yo tambibén debería tener hijos...
+
+en=But no, mating grosses me out, so I guess I won't.
+da=Nej, at parre sig synes jeg virker klamt, så jeg må nok lade være.
+es=No, aparearse me da asco, así que prefiero no intentarlo.
+
+@chapter more_about_lambs
+@anim camera_liedown
+@show lambs
+en=But the end result is nice. Even humans find the lambs cute.
+da=Men det fører til noget fint. Selv mennesker synes lammene er søde.
+es=Pero el resultado está bien. Incluso a los humanos os gustan las ovejtas.
+
+en=They say they're cute like puppies. I wonder what puppies look like.
+da=De siger de er ligeså søde som hundehvalpe. Gad vide hvordan hundehvalpe ser ud.
+es=Decís que son cuquis como cachorros. Me gustaría ver un cachorro.
+
+en=These lambs are cute. I hope their mother gets better soon.
+da=De her lam er i hvert fald søde. Jeg håber deres mor snart får det bedre.
+es=Son muy monas estas ovejitas. Ojalá se recupere pronto su mamá.
+
+en=Of course, since I haven't given birth, I can't feed them anything else than what grows on the field.
+da=Da jeg ikke selv har født, kan jeg ikke give dem andet at spise end græsset.
+es=Claro, como no he dado a luz no las puedo alimentar excepto con la hierba.
+
+en=But I think the shepherds have bottles with milk for them.
+da=Men jeg tror hyrderne har flasker med mælk til dem.
+es=Pero creo que los pastores tienen biberones para ellas.
+
+en=How many lambs did I have here again?
+da=Hvor mange lam var det nu jeg havde?
+es=¿Cuántas ovejitas tenía?
+
+@anim camera_chomp
+en=One. Two.
+da=Et. To.
+es=Una. Dos.
+
+en=Aaand I'm asleep.
+da=Ooog nu sover jeg.
+es=Yyyy me dormí.
+
+en=I think I've heard humans sleep in beds. What a place to sleep!
+da=Jeg har hørt at mennesker sover i enge. Sikke et sted at sove!
+es=He oído que los humanos dormís en ramas. ¡Qué curioso!
+
+en=Wouldn't they crush the flowers? Oh, now that I think about it, I think they use the word "bed" for something else. Never mind.
+da=Mennesker vil da ikke mase blomsterne, eller vil de? Nå nej, det var senge, ikke enge.  Der tog jeg fejl.
+es=Los humanos durmiendo como monos, como sean los... Ah, eran camas, no ramas, me eqivoqué.
+
+en=It's sorta like when they say sheep look cool with that soft wool. Of course we're not cool, we're warm.
+da=Det er ligesom når de siger "det ser fedt ud når får har så fint kryllet hår". Det er ikke fedt, det er uld.
+es=Es como cuando nos llamáis monas a las ovejas como si viviéramos en los árboles.
+
+en=Apparently humans call things they like "cool".
+da=Det kan godt være fedtet, men det mennesker mener med "fedt" er at de synes det er fint.
+es=Llamáis monos a los seres cuya apariencia os gusta.
+
+@chapter ending
+
+@show lambs
+@anim camera_down
+@rem ¿Dormid bien?
+en=Goodnight little lambs! Sleep well.
+da=Godnat små lam. Sov godt.
+es=Buenas noches, ovejitas. Dormid bien.
+
+en=I wonder when I'll fall asleep.
+da=Gad vide hvornår jeg falder i søvn.
+es=Me pregunto cuándo me dormiré yo.
+
+en=Wait, didn't I say I was asleep? Yeah, I'm asleep.
+da=Vent, sagde jeg ikke lige at jeg sov. Jo, jeg er faldet i søvn.
+es=Espera, he dicho que estoy durmiendo. Sip, me he dormido ya.
+
+en=I'm dreaming I'm a sheep, but I know I'm the sheepdog.
+da=Jeg drømmer at jeg er et får, men jeg ved godt jeg er fårehunden.
+es=Estoy soñando que soy una oveja, pero sé que soy el perro pastor.
+
+en=These lambs look kinda old for needing a dog for lambsitting.
+da=De her lam ser også lidt gamle ud for at have brug for en hund som plejemor.
+es=Estas ovejas tienen pinta de ser un poco grandes para necesitar un perro como yo.
+
+en=They could just be with a flock with more lambs and ewes.
+da=De kunne ligeså godt være i en flok med flere lam og får.
+es=Podrían estar en un rebaño con otras ovejas.
+
+@anim camera_up
+en=But okay, dreams don't need to be realistic.
+da=Men okay, drømme behøver ikke være realistiske.
+es=Pero vale, los sueños no tienen por qué ser realistas.
+
+en=And now I think I'll dream something else.
+da=Og nu tror jeg at jeg vil drømme om noget andet.
+es=Y ahora creo que voy a soñar con otras cosas.
+
+en=Bye, hoomans!
+da=Farvel, mennesker!
+es=¡Adiós, humanos!

@@ -1,0 +1,9 @@
+[color=#800]Tastaturbindinger[/color]:
+Fortsæt tekst: [color=blue]Melemrum, enter[/color]
+Tilbage i teksten: [color=blue]Slet, page_up[/color]
+Menu: [color=blue]Escape[/color]
+
+Vlgmuligheder kan vælges med piletasterne, bortset fra nogle tilbageknapper, som kan aktiveres ved at trykke på escape.
+
+[color=#800]Mouse controls[/color]:
+Menuen i bunden af skærmen har nogle knapper, og man kan gå frem ved at trykke andre steder i billedet.

@@ -1,0 +1,159 @@
+# Empty key, required y gettext, used for metadata
+msgid ""
+msgstr ""
+
+# MM is short for "main menu", used for main menu entries
+msgid "MM_CONTINUE"
+msgstr ""
+
+# MH is for main menu tooltips (H=hint), it appears Godot doesn't always show them though
+msgid "MH_CONTINUE"
+msgstr ""
+
+msgid "MM_HISTORY"
+msgstr ""
+
+msgid "MH_HISTORY"
+msgstr ""
+
+msgid "MM_RESTART"
+msgstr ""
+
+msgid "MH_RESTART"
+msgstr ""
+
+msgid "MM_PLAY"
+msgstr ""
+
+msgid "MH_PLAY"
+msgstr ""
+
+msgid "MM_LOAD"
+msgstr ""
+
+msgid "MH_LOAD"
+msgstr ""
+
+msgid "MM_LANGUAGE"
+msgstr ""
+
+msgid "MH_LANGUAGE"
+msgstr ""
+
+msgid "MM_CONFIG"
+msgstr ""
+
+msgid "MH_CONFIG"
+msgstr ""
+
+# Button to access the credits screen; the actual credits screen text is stored in a separate file
+msgid "MM_CREDITS"
+msgstr ""
+
+msgid "MH_CREDITS"
+msgstr ""
+
+# Same for the help/controls screen
+msgid "MM_HELP"
+msgstr ""
+
+msgid "MH_HELP"
+msgstr ""
+
+msgid "SM_BACK_TO_MENU"
+msgstr ""
+
+# Used on screens that have a button to return to the main menu
+msgid "SH_BACK_TO_MENU"
+msgstr ""
+
+msgid "CM_TEXT"
+msgstr ""
+
+msgid "CM_ACCESSIBILITY"
+msgstr ""
+
+msgid "CM_AUDIO"
+msgstr ""
+
+msgid "MH_TEXT"
+msgstr ""
+
+msgid "MH_ACCESSIBILITY"
+msgstr ""
+
+msgid "MH_AUDIO"
+msgstr ""
+
+# Speed at which text appears when being drawn character by character, in characters per second
+msgid "CM_TEXT_CPS"
+msgstr ""
+
+# Constant portion of delay between advances in autoplay
+msgid "CM_AUTO_DELAY"
+msgstr ""
+
+# Speed of variable portion
+msgid "CM_AUTO_CPS"
+msgstr ""
+
+# Delay between skips in skip mode
+msgid "CM_SKIP_DELAY"
+msgstr ""
+
+msgid "CM_FONT_SIZE"
+msgstr ""
+
+msgid "CM_SCROLL_SENSITIVITY"
+msgstr ""
+
+msgid "CM_VOICE_VOLUME"
+msgstr ""
+
+msgid "LM_PICK_CHAPTER_LABEL"
+msgstr ""
+
+msgid "ERROR_NO_SCRIPT"
+msgstr ""
+
+msgid "ERROR_SCREEN_TEXT_NOT_FOUND"
+msgstr ""
+
+msgid "CHAPTER_intro"
+msgstr ""
+
+msgid "CHAPTER_song"
+msgstr ""
+
+msgid "CHAPTER_cottages"
+msgstr ""
+
+msgid "CHAPTER_napping"
+msgstr ""
+
+msgid "CHAPTER_lambs"
+msgstr ""
+
+msgid "CHAPTER_more_about_lambs"
+msgstr ""
+
+msgid "CHAPTER_ending"
+msgstr ""
+
+msgid "QM_BACK"
+msgstr ""
+
+msgid "QM_SKIP"
+msgstr ""
+
+msgid "QM_AUTO"
+msgstr ""
+
+msgid "QM_HISTORY"
+msgstr ""
+
+msgid "QM_MENUS"
+msgstr ""
+
+msgid "VOICE_DECIMAL_POINT"
+msgstr ""

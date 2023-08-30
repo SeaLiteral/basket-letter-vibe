@@ -1,0 +1,52 @@
+Lavet af SeaLiteral (Lars Rune Præstmark) for O2A2q jam, og for Blossom jam i april 2023.
+
+Dele af denne rulletekst er skrevet af dem, som de handler om. Spilles spillet på andre sprog end engelsk vises mine egne oversættelser. Så har I virkelig behov for at vide præcis, så få fat i en translatør, sådan en er jeg ikke.
+
+I starten udelod jeg lyden da jeg havde problemer med at optage den. Nu har jeg tilføjet skærmoplæsning, selv om det nok stadig kan have svært ved at sige nogle ord, or det kan naturligvis ikke synge. Jeg har en optagelse af sangen på engelsk, men jeg vil hellere optage den forfra, og så optage den på alle tre sprog. Jeg håber jeg kan gøre det og få det med i spillet, men det vil nok tidligst kunne vre i oktober 2023. Jeg ved ikke engang hvor meget fritid jeg kommer til at have i den måned.
+
+Logoets skritftype: [color=blue]Back For the Bar[/color]. Den har jeg selv lavet, og foreløbigt ikke udgivet. Og jeg pillede manuelt ved nogle a formerne da jeg lavede logoet.
+
+Skrifttype jeg bruger i spillet: [color=blue]Roboto[/color] by Google. Under Apache-licensen:
+
+ Copyright 2011 Google Inc. Alle Rettigheder Forbeholdes
+
+ Udgivet under Apache-Licensen, Version 2.0 ("Licensen"); I må ikke bruge denne file bortset fra når denne Licens følges. I kan finde en kopi af Licensen på
+
+ [url]http://www.apache.org/licenses/LICENSE-2.0[/url]
+
+ Medmindre det kræves af gældende lovgivning eller er aftalt skriftligt, er software some udbredes under licensen udbredt på en "SOM DET ER"-BASIS, UDEN NOGEN FORM FOR GARANTIER ELLER KONDITIONER, hverken udtrykt eller underforstået. Se Licensen for det konkrete sprog som bestemmer tilladelser og begrænsninger under Licensen.
+
+Dette spil bruger [color=blue]Godot-spilmotoren[/color], som er tilgængelig under følgende licens:
+
+ Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur. Copyright (c) 2014-nu Godot-Engine-bidragsydere.
+
+ Det tillades hermed, gratis, for enhver der får et eksemplar af denne software og de sammenhængende dokumentationsfiler ("Softwaren"), at handle ubegrænset indefor Softwaren, inkluderet men ikke begrænset til rettighederne til at bruge, kopiere, ændre, sætte sammen, udgive, udbrede, underlicensere og/eller sælge kopier af Softwaren, og til at tillade andre som får Softwaren, at gøre de samme ting, under følgende konditioner:
+
+ Den ovenstående copyright-angivelse skal inkluderes i alle kopier eller betydelige dele af Softwaren.
+
+ SOFTWAREN STILLES TIL RÅDIGHED "SOM DEN ER", UDEN NOGEN FORM FOR GARANTI, UDTRYKT ELLER UNDERFORSTÅET, INKLUDERET MEN IKKE BEGRÆNSET TIL GARANTI FOR SALGBARHED, EGNETHED FOR BESTEMTE FORMÅL OG OVERHOLDELSE AF REGLER. I INGEN TILFÆLDE SKAL FORFATTERNE ELLER RETTIGHEDSHOLDERNE VÆRE ANSVARLIGE FOR NOGEN KRAV, ERSTATNING ELLER ANDET ANSVAR, HVERKEN GENNEM KONTRAKT, ERSTATNINGSRET ELLER ANDET, STAMMENDE FRA, UD AF ELLER I FORBINDELSE MED SOFTWAREN ELLER DENS BRUG ELLER HANDLINGER I DEN.
+ 
+[color=blue]FreeType-biblioteket[/color] brugt til tekstfremvisning:
+Dele af denne software er copyrighted © 2020 af FreeType-Projectet (www.freetype.org). Alle rettigheder forbeholdes.
+
+[color=blue]ENet[/color]
+Godot-spilmotoren bruger ENet, and og inkluderer det som standard. Da jeg ikke har fjernet dets funktionalitet fra mine udgaver af mine spil selvom mit spil ikke har brug for det, følger den meddelelse som de vil have med:
+
+ Copyright (c) 2002-2020 Lee Salzman
+
+ Det tillades hermed, gratis, for enhver der får et eksemplar af denne software og de sammenhængende dokumentationsfiler ("Softwaren"), at handle ubegrænset indefor Softwaren, inkluderet men ikke begrænset til rettighederne til at bruge, kopiere, ændre, sætte sammen, udgive, udbrede, underlicensere og/eller sælge kopier af Softwaren, og til at tillade andre som får Softwaren, at gøre de samme ting, under følgende konditioner:
+
+ Den ovenstående copyright-angivelse skal inkluderes i alle kopier eller betydelige dele af Softwaren.
+
+ SOFTWAREN STILLES TIL RÅDIGHED "SOM DEN ER", UDEN NOGEN FORM FOR GARANTI, UDTRYKT ELLER UNDERFORSTÅET, INKLUDERET MEN IKKE BEGRÆNSET TIL GARANTI FOR SALGBARHED, EGNETHED FOR BESTEMTE FORMÅL OG OVERHOLDELSE AF REGLER. I INGEN TILFÆLDE SKAL FORFATTERNE ELLER RETTIGHEDSHOLDERNE VÆRE ANSVARLIGE FOR NOGEN KRAV, ERSTATNING ELLER ANDET ANSVAR, HVERKEN GENNEM KONTRAKT, ERSTATNINGSRET ELLER ANDET, STAMMENDE FRA, UD AF ELLER I FORBINDELSE MED SOFTWAREN ELLER DENS BRUG ELLER HANDLINGER I DEN.
+
+[color=blue]mbed TLS[/color]
+En anden ting Godot-spilmotoren har med som standard og som jeg ikke har orket at slå fra selvom jeg ikke rigtig har brug for det er mbed TLS. Den er, ligesom Roboto-skrifttypen, under Apache-Licensen:
+
+ Copyright Mbed TLS' Bidragsydere
+
+ Udgivet under Apache-Licensen, Version 2.0 ("Licensen"); I må ikke bruge denne file bortset fra når denne Licens følges. I kan finde en kopi af Licensen på
+
+ [url]http://www.apache.org/licenses/LICENSE-2.0[/url]
+
+ Medmindre det kræves af gældende lovgivning eller er aftalt skriftligt, er software some udbredes under licensen udbredt på en "SOM DET ER"-BASIS, UDEN NOGEN FORM FOR GARANTIER ELLER KONDITIONER, hverken udtrykt eller underforstået. Se Licensen for det konkrete sprog som bestemmer tilladelser og begrænsninger under Licensen.

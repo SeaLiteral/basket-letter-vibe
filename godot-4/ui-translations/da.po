@@ -1,0 +1,166 @@
+# Empty key, required y gettext, used for metadata
+msgid ""
+msgstr "Project-Id-Version: Sheep Monologue 1.3\n"
+"Last-Translator: SeaLiteral\n"
+"Language-Team: none\n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+# MM is short for "main menu", used for main menu entries
+msgid "MM_CONTINUE"
+msgstr "Fortsæt spil"
+
+# MH is for main menu tooltips (H=hint), it appears Godot doesn't always show them though
+msgid "MH_CONTINUE"
+msgstr "Forlader menuen og fortsæt spillet"
+
+msgid "MM_HISTORY"
+msgstr "Historik"
+
+msgid "MH_HISTORY"
+msgstr "Viser historikskærmen"
+
+msgid "MM_RESTART"
+msgstr "Genstart spil"
+
+msgid "MH_RESTART"
+msgstr "Starter spillet forfra fra begyndelsen"
+
+msgid "MM_PLAY"
+msgstr "Start spil"
+
+msgid "MH_PLAY"
+msgstr "Starter spillet"
+
+msgid "MM_LOAD"
+msgstr "Indlæs kapitel"
+
+msgid "MH_LOAD"
+msgstr "Indlæs et tidligere set kapitel."
+
+msgid "MM_LANGUAGE"
+msgstr "Skift sprog"
+
+msgid "MH_LANGUAGE"
+msgstr "Viser sprogmenuen"
+
+msgid "MM_CONFIG"
+msgstr "Indstillinger"
+
+msgid "MH_CONFIG"
+msgstr "Skift indstillinger"
+
+# Button to access the credits screen; the actual credits screen text is stored in a separate file
+msgid "MM_CREDITS"
+msgstr "Rulletekst"
+
+msgid "MH_CREDITS"
+msgstr "Viser oplysninger om spillet"
+
+# Same for the help/controls screen
+msgid "MM_HELP"
+msgstr "Hjælp"
+
+msgid "MH_HELP"
+msgstr "Viser oplysninger om hvordan spillet styres"
+
+msgid "SM_BACK_TO_MENU"
+msgstr "Tilbage"
+
+# Used on screens that have a button to return to the main menu
+msgid "SH_BACK_TO_MENU"
+msgstr "Går tilbage til menuen"
+
+msgid "CM_TEXT"
+msgstr "Tekst"
+
+msgid "CM_ACCESSIBILITY"
+msgstr "Tilgængelighed"
+
+msgid "CM_AUDIO"
+msgstr "Lyd"
+
+msgid "MH_TEXT"
+msgstr "Tekstindstillinger"
+
+msgid "MH_ACCESSIBILITY"
+msgstr "Tilgængelighedsindstillinger"
+
+msgid "MH_AUDIO"
+msgstr "Lydinstillinger"
+
+# Speed at which text appears when being drawn character by character, in characters per second
+msgid "CM_TEXT_CPS"
+msgstr "Teksthastighed (%f cps)"
+
+# Constant portion of delay between advances in autoplay
+msgid "CM_AUTO_DELAY"
+msgstr "Autoplay-forsinkelse (%f sekunder)"
+
+# Speed of variable portion
+msgid "CM_AUTO_CPS"
+msgstr "Autoplay-læsehastighed (%f cps)"
+
+# Delay between skips in skip mode
+msgid "CM_SKIP_DELAY"
+msgstr "Spring-over-forsinkelse (%f sekunder)"
+
+msgid "CM_FONT_SIZE"
+msgstr "Teksstørrelse"
+
+msgid "CM_SCROLL_SENSITIVITY"
+msgstr "Musehjulets følsomhed"
+
+msgid "CM_VOICE_VOLUME"
+msgstr "Lydstyrke for stemme"
+
+msgid "LM_PICK_CHAPTER_LABEL"
+msgstr "Kapitler:"
+
+msgid "ERROR_NO_SCRIPT"
+msgstr "\"Fejl: Teksterne kunne ikke læses!\""
+
+msgid "ERROR_SCREEN_TEXT_NOT_FOUND"
+msgstr "\"Fejl: Skærmteksten kunne ikke læses!\""
+
+msgid "CHAPTER_intro"
+msgstr "Introduktion"
+
+msgid "CHAPTER_song"
+msgstr "Sang"
+
+msgid "CHAPTER_cottages"
+msgstr "Hytter"
+
+msgid "CHAPTER_napping"
+msgstr "En lur"
+
+msgid "CHAPTER_lambs"
+msgstr "Lam"
+
+msgid "CHAPTER_more_about_lambs"
+msgstr "Overvejelser"
+
+msgid "CHAPTER_ending"
+msgstr "Slutning"
+
+msgid "QM_BACK"
+msgstr "Tilbage"
+
+msgid "QM_SKIP"
+msgstr "Spring over"
+
+msgid "QM_AUTO"
+msgstr "Autoplay"
+
+msgid "QM_HISTORY"
+msgstr "Historik"
+
+msgid "QM_MENUS"
+msgstr "Vis menuer"
+
+msgid "VOICE_DECIMAL_POINT"
+msgstr "komma"

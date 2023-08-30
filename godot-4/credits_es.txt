@@ -1,0 +1,21 @@
+Creado por SeaLiteral (Lars Rune Præstmark) para la O2A2q jam, y la Blossom jam en abril de 2023.
+
+Partes de esta pantalla de créditos están escritos por las personas que menciona. Si estás jugando al juego en otra lengua que no es inglés, se muestran mis traducciones. Si necesita saber exactamente que dicen, consulte con un traductor jurídico (que yo no soy).
+
+[Nota: traducción incompleta]
+
+[color=blue]Motor de juegos Godot[/color]
+Este juego usa el motor de juegos Godot Engine, disponible bajo la siguiente licencia:
+
+ Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur. Copyright (c) 2014-presente contributores al motor de juegos Godot.
+
+ Aquí se permite, gratis, a cualquiera que obtenga un ejemplar de este software y los archivos correspondientes de documentación (el "Software"), manejar el Software sin restricciones, incluído pero sin limitarse a los derechos a usar, copiar, modificar, combinar con otros elementos, publicar, distribuir, sublicenciar y/o vender copias del Software, y para permitir a otros recepptores del Software hacer lo mismo, sujeto a las siguientes condiciones:
+
+ La anterior nota de copyright y esta nota de permisos debe incluirse en todas las copias o porciones substanciales del Software.
+
+ EL SOFTWARE SE PROVEE "COMO ESTÁ", SIN NINGÚN TIPO DE GARANTÍA, EXPLÍCITA NI IMPLÍCITA, INCLUÍDA PERO SIN LIMITARSE A LAS GARANTÍAS DE MERCANTIBILIDAD, QUE SEA APROPIADO PARA FINES CONCRETOS, Y DE QUE CUMPLA TODAS LAS LEYES. EN NINGÚN CASO LOS AUTORES O TENDERORES DE LOS DERECHOS DE PROPIEDAD INTELECTUAL SERÁN RESPONSABLE DE QUEJAS, DAÑOS Y PERJUICIOS U OTRAS RESPONSABILIDADES, NIN POR ACCIÓN DEL CONTRATO, COMPENSACIÓN, QUE RESULTARA DE, COMO CONSECUENCIA DE ON EN CONEXIÓN CON EL SOFTWARE O DEL USO O MANEJO DEL SOFTWARE.
+ 
+ [color=blue]Biblioteca FreeType[/color] usada para mostrar texto
+Partes de este software tienen copyright © 2020 del proyecto FreeType Project (www.freetype.org). Todos los derechos resevados.
+
+[color=blue]Tipo de letra: Roboto[/color], producido por Google (bajo la licencia Apache)
