@@ -2,8 +2,9 @@
 Avanzar texto: [color=blue]Espacio, intro[/color]
 Retroceder en el texto: [color=blue]Borrar, page_up[/color]
 Menú: [color=blue]Escape[/color]
+Saltar texto: mantener pulsado [color=blue]control[/color] o activar o desactivar con [color=blue]tabulador[/color].
 
 Las opciones de los menús se pueden seleccionar con las teclas de dirección, excepto algunos botones "atrás" que se pueden activar pulsando escape.
 
-[color=#800]Mouse controls[/color]:
+[color=#800]Controles del ratón[/color]:
 El menú de acceso rápido tiene algunos botones, y se puede avanzar el text haciendo click en otras partes de la pantalla.

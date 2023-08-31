@@ -122,22 +122,7 @@ msgstr ""
 msgid "CHAPTER_intro"
 msgstr ""
 
-msgid "CHAPTER_song"
-msgstr ""
-
-msgid "CHAPTER_cottages"
-msgstr ""
-
-msgid "CHAPTER_napping"
-msgstr ""
-
-msgid "CHAPTER_lambs"
-msgstr ""
-
-msgid "CHAPTER_more_about_lambs"
-msgstr ""
-
-msgid "CHAPTER_ending"
+msgid "CHAPTER_otherchapter"
 msgstr ""
 
 msgid "QM_BACK"

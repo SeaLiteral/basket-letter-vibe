@@ -1,5 +1,8 @@
 res://default_env.tres
 res://countryside_with_lamb.tscn
 res://default_theme.tres
-res://countryside_with_lamb.gd
-res://credits_en.txt
+res://vn.tscn
+res://controls_en.txt
+res://controls_da.txt
+res://controls_es.txt
+res://vn_ui.gd

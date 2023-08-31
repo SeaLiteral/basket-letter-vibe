@@ -129,23 +129,8 @@ msgstr "\"Fejl: Skærmteksten kunne ikke læses!\""
 msgid "CHAPTER_intro"
 msgstr "Introduktion"
 
-msgid "CHAPTER_song"
-msgstr "Sang"
-
-msgid "CHAPTER_cottages"
-msgstr "Hytter"
-
-msgid "CHAPTER_napping"
-msgstr "En lur"
-
-msgid "CHAPTER_lambs"
-msgstr "Lam"
-
-msgid "CHAPTER_more_about_lambs"
-msgstr "Overvejelser"
-
-msgid "CHAPTER_ending"
-msgstr "Slutning"
+msgid "CHAPTER_otherchapter"
+msgstr "Et andet kapitel"
 
 msgid "QM_BACK"
 msgstr "Tilbage"

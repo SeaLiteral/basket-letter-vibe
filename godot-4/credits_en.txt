@@ -1,10 +1,14 @@
-Sheep Monologue 1.3. Made by SeaLiteral (Lars Rune Præstmark) for the O2A2q jam, and for the Blossom jam in April 2023.
+[color=blue]Basket Letter Vibe[/color] 1.0. This is a simple Visual Novel made in Godot, supporting features like rollback and history, based on Sheep Monologue. I am releasing it under the MIT license:
 
-Parts of this credits screen are written by the people that it mentions. If you're playing this game in another language than English, it shows my own translations. So if you really need to know exactly what they mean, go get a legal translator, I'm not one myself.
+ Copyright (c) 2023 Lars Rune Præstmark
 
-Audio was initially left out due to recording issues. Now I've added self-voicing, although it might still struggle reading some words, and it obviously doesn't sing. I do have a recording of the song in English, but I want to make another recording of it and then do it in all three languages. I hope to do that and put it in the game, but it would probably be in October 2023 or later. I don't even know how much free time I'll have during that month.
+ Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-Logo font: [color=blue]Back For the Bar[/color]. Made by myself, unreleased so far. And I tweaked some shapes manually while making the logo.
+ The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+Note from Lars Rune Præstmark (known on some websites as SeaLiteral): Parts of this credits screen are written by the people that it mentions. If you're playing this game in Danish or Spanish, it shows my own [color=blue]translations, which are not necessarily perfect.[/color] (And if you're somehow seeing it in another language than Danish, Spanish or English, that probably means someone else translated them and this message). It's not the type of text I specialize in translating, so if you need to know exactly what they say, it's probably best to read the English version (either by setting the game to English or following the hyperlinks below) and perhaps hire a translator that actually specialises in that type of text. Just saying.
 
 Font used in the game: [color=blue]Roboto[/color] by Google. Under the Apache license:
 

@@ -2,6 +2,7 @@
 Fortsæt tekst: [color=blue]Melemrum, enter[/color]
 Tilbage i teksten: [color=blue]Slet, page_up[/color]
 Menu: [color=blue]Escape[/color]
+Spring over: hold [color=blue]control[/color] eller slå til og fra med [color=blue]tabulator[/color].
 
 Vlgmuligheder kan vælges med piletasterne, bortset fra nogle tilbageknapper, som kan aktiveres ved at trykke på escape.
 

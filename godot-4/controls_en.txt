@@ -2,6 +2,7 @@
 Next panel: [color=blue]Space, enter[/color]
 Back (previous panel): [color=blue]backspace, page_up[/color]
 Toggle menu: [color=blue]Escape[/color]
+Skip: hold [color=blue]control[/color] or toggle with [color=blue]tab[/color]
 
 Menu items can be highlighted with the arrow keys, except for some back buttons that can be activated by pressing escape.
 

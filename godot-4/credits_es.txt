@@ -1,8 +1,26 @@
-Creado por SeaLiteral (Lars Rune Præstmark) para la O2A2q jam, y la Blossom jam en abril de 2023.
+[color=blue]Basket Letter Vibe[/color] 1.0. Esto es una Novela Visual simple, hecha en Godot, con funcionalidades como retroceso y pantalla de historial, basada en Sheep Monologue [Monólogo de una Oveja]. La publico bajo la licencia MIT:
 
-Partes de esta pantalla de créditos están escritos por las personas que menciona. Si estás jugando al juego en otra lengua que no es inglés, se muestran mis traducciones. Si necesita saber exactamente que dicen, consulte con un traductor jurídico (que yo no soy).
+ Copyright (c) 2023 Lars Rune Præstmark
 
-[Nota: traducción incompleta]
+ Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur. Copyright (c) 2014-presente contributores al motor de juegos Godot.
+
+ Aquí se permite, gratis, a cualquiera que obtenga un ejemplar de este software y los archivos correspondientes de documentación (el "Software"), manejar el Software sin restricciones, incluído pero sin limitarse a los derechos a usar, copiar, modificar, combinar con otros elementos, publicar, distribuir, sublicenciar y/o vender copias del Software, y para permitir a otros recepptores del Software hacer lo mismo, sujeto a las siguientes condiciones:
+
+ La anterior nota de copyright y esta nota de permisos debe incluirse en todas las copias o porciones substanciales del Software.
+
+ EL SOFTWARE SE PROVEE "COMO ESTÁ", SIN NINGÚN TIPO DE GARANTÍA, EXPLÍCITA NI IMPLÍCITA, INCLUÍDA PERO SIN LIMITARSE A LAS GARANTÍAS DE MERCANTIBILIDAD, QUE SEA APROPIADO PARA FINES CONCRETOS, Y DE QUE CUMPLA TODAS LAS LEYES. EN NINGÚN CASO LOS AUTORES O TENDERORES DE LOS DERECHOS DE PROPIEDAD INTELECTUAL SERÁN RESPONSABLE DE QUEJAS, DAÑOS Y PERJUICIOS U OTRAS RESPONSABILIDADES, NIN POR ACCIÓN DEL CONTRATO, COMPENSACIÓN, QUE RESULTARA DE, COMO CONSECUENCIA DE ON EN CONEXIÓN CON EL SOFTWARE O DEL USO O MANEJO DEL SOFTWARE.
+
+Aviso escrito por Lars Rune Præstmark (que en algunos sitios web se conoce como SeaLiteral): Partes de esta pantalla de créditos están escritos por las personas que menciona. Si estáis jugando al juego en danés o español, se muestran las [color=blue]traducciones mías, que no tienen por qué ser perfectas[/color]. (Y si resulta que estáis leyendo este mensaje en otro idioma que no es ni danés, ni español ni inglés, probablemente signifique que otra persona ha traducido esas mensajes y esta nota, que tampoco tiene por que ser traducciones perfectas.) No es el tipo de texto que normalmente traduzco, así que si necesitáis saber exactamente qué dicen, probablemente sea mejor leerlos en inglés y quizás contratar a un traductor jurídico que conoce mejor ese tipo de texto. Luego no me digáis que no os he avisado.
+
+[color=blue]Tipo de letra usado en el juego: Roboto[/color], producido por Google (bajo la licencia Apache):
+
+Copyright 2011 Google Inc. Todos los Derechos Reservados
+
+ Bajo la Licencia Apache, Versión 2.0 (la "Licencia"); no pueden usar este archivo excepto cumpliendo con la Licencia. Pueden hallar un ejemplar de la Licencia en
+
+ [url]http://www.apache.org/licenses/LICENSE-2.0[/url]
+
+ A no ser que la ley vigente lo requiera o se acuerde por escrito, el software distribuido bajo la Licencia se distribuye en BASE DE "COMO ES", SIN NNGÚN TIPO DE GARANTÍAS NI CONDICIONES, ni expresas ni implícitas. Vea la Licencia para ver el lenguaje concreto que gobierna los permisos y limitaciones bajo la Licencia.
 
 [color=blue]Motor de juegos Godot[/color]
 Este juego usa el motor de juegos Godot Engine, disponible bajo la siguiente licencia:
@@ -18,4 +36,24 @@ Este juego usa el motor de juegos Godot Engine, disponible bajo la siguiente lic
  [color=blue]Biblioteca FreeType[/color] usada para mostrar texto
 Partes de este software tienen copyright © 2020 del proyecto FreeType Project (www.freetype.org). Todos los derechos resevados.
 
-[color=blue]Tipo de letra: Roboto[/color], producido por Google (bajo la licencia Apache)
+[color=blue]ENet[/color]
+El motor de juego Godot usa ENet, y lo incluye por defecto. Dado que no he quitado su funcionalidad de esta versión de este juego a pesar de que el juego no la necesita, aquí va la advertencia que me hace incluir:
+
+ Copyright (c) 2002-2020 Lee Salzman
+
+ Aquí se permite, gratis, a cualquiera que obtenga un ejemplar de este software y los archivos correspondientes de documentación (el "Software"), manejar el Software sin restricciones, incluído pero sin limitarse a los derechos a usar, copiar, modificar, combinar con otros elementos, publicar, distribuir, sublicenciar y/o vender copias del Software, y para permitir a otros recepptores del Software hacer lo mismo, sujeto a las siguientes condiciones:
+
+ La anterior nota de copyright y esta nota de permisos debe incluirse en todas las copias o porciones substanciales del Software.
+
+ EL SOFTWARE SE PROVEE "COMO ESTÁ", SIN NINGÚN TIPO DE GARANTÍA, EXPLÍCITA NI IMPLÍCITA, INCLUÍDA PERO SIN LIMITARSE A LAS GARANTÍAS DE MERCANTIBILIDAD, QUE SEA APROPIADO PARA FINES CONCRETOS, Y DE QUE CUMPLA TODAS LAS LEYES. EN NINGÚN CASO LOS AUTORES O TENDERORES DE LOS DERECHOS DE PROPIEDAD INTELECTUAL SERÁN RESPONSABLE DE QUEJAS, DAÑOS Y PERJUICIOS U OTRAS RESPONSABILIDADES, NIN POR ACCIÓN DEL CONTRATO, COMPENSACIÓN, QUE RESULTARA DE, COMO CONSECUENCIA DE ON EN CONEXIÓN CON EL SOFTWARE O DEL USO O MANEJO DEL SOFTWARE.
+
+[color=blue]mbed TLS[/color]
+Otra cosa que Godot incluye por defecto y que no me he esforzado por desactivar a pesar de no necesitarla es mbed TLS, que, igual que la fuente tipográfica Roboto, está bajo la Licencia Apache:
+
+ Copyright The Mbed TLS Contributors
+
+Bajo la Licencia Apache, Versión 2.0 (la "Licencia"); no pueden usar este archivo excepto cumpliendo con la Licencia. Pueden hallar un ejemplar de la Licencia en
+
+ [url]http://www.apache.org/licenses/LICENSE-2.0[/url]
+
+ A no ser que la ley vigente lo requiera o se acuerde por escrito, el software distribuido bajo la Licencia se distribuye en BASE DE "COMO ES", SIN NNGÚN TIPO DE GARANTÍAS NI CONDICIONES, ni expresas ni implícitas. Vea la Licencia para ver el lenguaje concreto que gobierna los permisos y limitaciones bajo la Licencia.

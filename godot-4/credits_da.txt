@@ -1,10 +1,16 @@
-Lavet af SeaLiteral (Lars Rune Præstmark) for O2A2q jam, og for Blossom jam i april 2023.
+[color=blue]Basket Letter Vibe[/color] 1.0. Dette er en enkel Visual Novel lavet i Godot, som bl. a. understøtter tilbagerulning or historikskærm, baseret på Sheep Monologue [Fårets Monolog]. Jeg udgiver den under MIT-licensen:
+
+ Copyright (c) 2023 Lars Rune Præstmark
+
+Det tillades hermed, gratis, for enhver der får et eksemplar af denne software og de sammenhængende dokumentationsfiler ("Softwaren"), at handle ubegrænset indefor Softwaren, inkluderet men ikke begrænset til rettighederne til at bruge, kopiere, ændre, sætte sammen, udgive, udbrede, underlicensere og/eller sælge kopier af Softwaren, og til at tillade andre som får Softwaren, at gøre de samme ting, under følgende konditioner:
+
+ Den ovenstående copyright-angivelse skal inkluderes i alle kopier eller betydelige dele af Softwaren.
+
+ SOFTWAREN STILLES TIL RÅDIGHED "SOM DEN ER", UDEN NOGEN FORM FOR GARANTI, UDTRYKT ELLER UNDERFORSTÅET, INKLUDERET MEN IKKE BEGRÆNSET TIL GARANTI FOR SALGBARHED, EGNETHED FOR BESTEMTE FORMÅL OG OVERHOLDELSE AF REGLER. I INGEN TILFÆLDE SKAL FORFATTERNE ELLER RETTIGHEDSHOLDERNE VÆRE ANSVARLIGE FOR NOGEN KRAV, ERSTATNING ELLER ANDET ANSVAR, HVERKEN GENNEM KONTRAKT, ERSTATNINGSRET ELLER ANDET, STAMMENDE FRA, UD AF ELLER I FORBINDELSE MED SOFTWAREN ELLER DENS BRUG ELLER HANDLINGER I DEN.
 
 Dele af denne rulletekst er skrevet af dem, som de handler om. Spilles spillet på andre sprog end engelsk vises mine egne oversættelser. Så har I virkelig behov for at vide præcis, så få fat i en translatør, sådan en er jeg ikke.
 
-I starten udelod jeg lyden da jeg havde problemer med at optage den. Nu har jeg tilføjet skærmoplæsning, selv om det nok stadig kan have svært ved at sige nogle ord, or det kan naturligvis ikke synge. Jeg har en optagelse af sangen på engelsk, men jeg vil hellere optage den forfra, og så optage den på alle tre sprog. Jeg håber jeg kan gøre det og få det med i spillet, men det vil nok tidligst kunne vre i oktober 2023. Jeg ved ikke engang hvor meget fritid jeg kommer til at have i den måned.
-
-Logoets skritftype: [color=blue]Back For the Bar[/color]. Den har jeg selv lavet, og foreløbigt ikke udgivet. Og jeg pillede manuelt ved nogle a formerne da jeg lavede logoet.
+Meddelelse fra Lars Rune Præstmark (known on some websites as SeaLiteral): Dele af denne rulletekst er skrevet af dem, som de handler om. Hvis I spiller spillet på dansk eller spansk, viser det mine egne [color=blue]oversættelser, som ikke nødvendigvis er perfekte.[/color] (Og hvis I af en eller anden grund ser denne tekst på et andet sprog en dansk, spansk eller engelsk, så betyder det nok at en anden har oversat dem og denne besked.) Det er ikke den slags tekst jeg er specialist i at oversætte, så har I brug for at vide præcis hvad der står, så er det nok bedst at læse den engelske udgave (enten ved at sætte sproget til engelsk, eller ved at bruge hyperlinkene nedenfor, og måske ansætte en oversætter der faktisk er specialist i den slags tekst. Jeg siger det bare.
 
 Skrifttype jeg bruger i spillet: [color=blue]Roboto[/color] by Google. Under Apache-licensen:
 

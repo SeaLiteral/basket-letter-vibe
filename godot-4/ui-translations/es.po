@@ -117,23 +117,8 @@ msgstr "\"Error: No se pudo leer el texto para la pantalla.\""
 msgid "CHAPTER_intro"
 msgstr "Introducción"
 
-msgid "CHAPTER_song"
-msgstr "Canción"
-
-msgid "CHAPTER_cottages"
-msgstr "Casetas"
-
-msgid "CHAPTER_napping"
-msgstr "Siestecilla"
-
-msgid "CHAPTER_lambs"
-msgstr "Ovejitas"
-
-msgid "CHAPTER_more_about_lambs"
-msgstr "Consideraciones"
-
-msgid "CHAPTER_ending"
-msgstr "Final"
+msgid "CHAPTER_otherchapter"
+msgstr "Otro capítulo"
 
 msgid "QM_BACK"
 msgstr "Atrás"

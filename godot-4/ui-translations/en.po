@@ -129,20 +129,8 @@ msgstr "\"Error: Screen text not found!\""
 msgid "CHAPTER_intro"
 msgstr "Introduction"
 
-msgid "CHAPTER_song"
-msgstr "Song"
-
-msgid "CHAPTER_cottages"
-msgstr "Cottages"
-
-msgid "CHAPTER_napping"
-msgstr "Napping"
-
-msgid "CHAPTER_lambs"
-msgstr "Lambs"
-
-msgid "CHAPTER_more_about_lambs"
-msgstr "Thoughts"
+msgid "CHAPTER_otherchapter"
+msgstr "Other chapter"
 
 msgid "CHAPTER_ending"
 msgstr "Ending"
