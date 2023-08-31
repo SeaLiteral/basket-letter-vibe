@@ -73,7 +73,7 @@ var vn_reversible_animations = ['camera_up', 'camera_down']
 var vn_chapter_positions = {}
 var vn_chapter_names = {}
 var vn_first_chapter = 'intro'
-var vn_savedata_filename = "user://sheepmo.txt"
+var vn_savedata_filename = "user://balevi.txt"
 var vn_running_buttons = {}
 
 var vn_screen_text = []
