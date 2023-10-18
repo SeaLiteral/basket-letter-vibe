@@ -2,7 +2,7 @@
 
  Copyright (c) 2023 Lars Rune Præstmark
 
-Det tillades hermed, gratis, for enhver der får et eksemplar af denne software og de sammenhængende dokumentationsfiler ("Softwaren"), at handle ubegrænset indefor Softwaren, inkluderet men ikke begrænset til rettighederne til at bruge, kopiere, ændre, sætte sammen, udgive, udbrede, underlicensere og/eller sælge kopier af Softwaren, og til at tillade andre som får Softwaren, at gøre de samme ting, under følgende konditioner:
+ Det tillades hermed, gratis, for enhver der får et eksemplar af denne software og de sammenhængende dokumentationsfiler ("Softwaren"), at handle ubegrænset indefor Softwaren, inkluderet men ikke begrænset til rettighederne til at bruge, kopiere, ændre, sætte sammen, udgive, udbrede, underlicensere og/eller sælge kopier af Softwaren, og til at tillade andre som får Softwaren, at gøre de samme ting, under følgende konditioner:
 
  Den ovenstående copyright-angivelse skal inkluderes i alle kopier eller betydelige dele af Softwaren.
 

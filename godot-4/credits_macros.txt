@@ -1,0 +1,145 @@
+@macro highlight_color | highlight_colour
+blue
+@end macro
+
+
+@macro license=apache
+@in_language en default mandatory_language
+ Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+
+ [url]http://www.apache.org/licenses/LICENSE-2.0[/url]
+
+ Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+@in_languge da
+ Udgivet under Apache-Licensen, Version 2.0 ("Licensen"); I må ikke bruge denne file bortset fra når denne Licens følges. I kan finde en kopi af Licensen på
+
+ [url]http://www.apache.org/licenses/LICENSE-2.0[/url]
+
+ Medmindre det kræves af gældende lovgivning eller er aftalt skriftligt, er software some udbredes under licensen udbredt på en "SOM DET ER"-BASIS, UDEN NOGEN FORM FOR GARANTIER ELLER KONDITIONER, hverken udtrykt eller underforstået. Se Licensen for det konkrete sprog som bestemmer tilladelser og begrænsninger under Licensen.
+@in_language da
+ Det tillades hermed, gratis, for enhver der får et eksemplar af denne software og de sammenhængende dokumentationsfiler ("Softwaren"), at handle ubegrænset indefor Softwaren, inkluderet men ikke begrænset til rettighederne til at bruge, kopiere, ændre, sætte sammen, udgive, udbrede, underlicensere og/eller sælge kopier af Softwaren, og til at tillade andre som får Softwaren, at gøre de samme ting, under følgende konditioner:
+
+ Den ovenstående copyright-angivelse skal inkluderes i alle kopier eller betydelige dele af Softwaren.
+
+ SOFTWAREN STILLES TIL RÅDIGHED "SOM DEN ER", UDEN NOGEN FORM FOR GARANTI, UDTRYKT ELLER UNDERFORSTÅET, INKLUDERET MEN IKKE BEGRÆNSET TIL GARANTI FOR SALGBARHED, EGNETHED FOR BESTEMTE FORMÅL OG OVERHOLDELSE AF REGLER. I INGEN TILFÆLDE SKAL FORFATTERNE ELLER RETTIGHEDSHOLDERNE VÆRE ANSVARLIGE FOR NOGEN KRAV, ERSTATNING ELLER ANDET ANSVAR, HVERKEN GENNEM KONTRAKT, ERSTATNINGSRET ELLER ANDET, STAMMENDE FRA, UD AF ELLER I FORBINDELSE MED SOFTWAREN ELLER DENS BRUG ELLER HANDLINGER I DEN.
+@in_language es
+ Bajo la Licencia Apache, Versión 2.0 (la "Licencia"); no pueden usar este archivo excepto cumpliendo con la Licencia. Pueden hallar un ejemplar de la Licencia en
+
+ [url]http://www.apache.org/licenses/LICENSE-2.0[/url]
+
+ A no ser que la ley vigente lo requiera o se acuerde por escrito, el software distribuido bajo la Licencia se distribuye en BASE DE "COMO ES", SIN NNGÚN TIPO DE GARANTÍAS NI CONDICIONES, ni expresas ni implícitas. Vea la Licencia para ver el lenguaje concreto que gobierna los permisos y limitaciones bajo la Licencia.
+@end in_language
+@end macro
+
+
+@macro license_mit
+@in_language en default mandatory_language
+ Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+ The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+@in_language da
+ Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur. Copyright (c) 2014-nu Godot-Engine-bidragsydere.
+
+ Det tillades hermed, gratis, for enhver der får et eksemplar af denne software og de sammenhængende dokumentationsfiler ("Softwaren"), at handle ubegrænset indefor Softwaren, inkluderet men ikke begrænset til rettighederne til at bruge, kopiere, ændre, sætte sammen, udgive, udbrede, underlicensere og/eller sælge kopier af Softwaren, og til at tillade andre som får Softwaren, at gøre de samme ting, under følgende konditioner:
+
+ Den ovenstående copyright-angivelse skal inkluderes i alle kopier eller betydelige dele af Softwaren.
+
+ SOFTWAREN STILLES TIL RÅDIGHED "SOM DEN ER", UDEN NOGEN FORM FOR GARANTI, UDTRYKT ELLER UNDERFORSTÅET, INKLUDERET MEN IKKE BEGRÆNSET TIL GARANTI FOR SALGBARHED, EGNETHED FOR BESTEMTE FORMÅL OG OVERHOLDELSE AF REGLER. I INGEN TILFÆLDE SKAL FORFATTERNE ELLER RETTIGHEDSHOLDERNE VÆRE ANSVARLIGE FOR NOGEN KRAV, ERSTATNING ELLER ANDET ANSVAR, HVERKEN GENNEM KONTRAKT, ERSTATNINGSRET ELLER ANDET, STAMMENDE FRA, UD AF ELLER I FORBINDELSE MED SOFTWAREN ELLER DENS BRUG ELLER HANDLINGER I DEN.
+@in_language es
+ Aquí se permite, gratis, a cualquiera que obtenga un ejemplar de este software y los archivos correspondientes de documentación (el "Software"), manejar el Software sin restricciones, incluído pero sin limitarse a los derechos a usar, copiar, modificar, combinar con otros elementos, publicar, distribuir, sublicenciar y/o vender copias del Software, y para permitir a otros recepptores del Software hacer lo mismo, sujeto a las siguientes condiciones:
+
+ La anterior nota de copyright y esta nota de permisos debe incluirse en todas las copias o porciones substanciales del Software.
+
+ EL SOFTWARE SE PROVEE "COMO ES", SIN NINGÚN TIPO DE GARANTÍA, EXPLÍCITA NI IMPLÍCITA, INCLUÍDA PERO SIN LIMITARSE A LAS GARANTÍAS DE MERCANTIBILIDAD, QUE SEA APROPIADO PARA FINES CONCRETOS, Y DE QUE CUMPLA TODAS LAS LEYES. EN NINGÚN CASO LOS AUTORES O TENDERORES DE LOS DERECHOS DE PROPIEDAD INTELECTUAL SERÁN RESPONSABLE DE QUEJAS, DAÑOS Y PERJUICIOS U OTRAS RESPONSABILIDADES, NIN POR ACCIÓN DEL CONTRATO, COMPENSACIÓN, QUE RESULTARA DE, COMO CONSECUENCIA DE ON EN CONEXIÓN CON EL SOFTWARE O DEL USO O MANEJO DEL SOFTWARE.
+@end in_language
+@end macro
+
+
+@macro credit_godot
+@in_language en default mandatory_language
+This game uses [color=[@use highlight_color/]]Godot Engine[/color], available under the following license:
+
+ Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur. Copyright (c) 2014-present Godot Engine contributors.
+@in_language da
+Dette spil bruger [color=[@use highlight_color/]]Godot-spilmotoren[/color], som er tilgængelig under følgende licens:
+
+ Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur. Copyright (c) 2014-nu Godot-Engine-bidragsydere.
+@in_language es
+[color=[@use highlight_color/]]Motor de juegos Godot[/color]
+Este juego usa el motor de juegos Godot Engine, disponible bajo la siguiente licencia:
+
+ Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur. Copyright (c) 2014-presente contributores al motor de juegos Godot.
+@end in_language
+@use license_mit
+@end macro
+
+@macro credit_freetype
+@in_language en default mandatory_language
+This game uses the [color=blue]FreeType library[/color] for font rendering, which comes with the following notice:
+ Portions of this software are copyright © 2023 The FreeType Project (www.freetype.org). All rights reserved.
+@in_language da
+Dette spil bruger [color=blue]FreeType-biblioteket[/color] til tekstfremvisning, som kommer med følgende meddelelse:
+Dele af denne software er copyrighted © 2020 af FreeType-Projectet (www.freetype.org). Alle rettigheder forbeholdes.
+@in_language es
+Este juego usa la [color=blue]Biblioteca FreeType[/color] para mostrar texto, que viene con la siguiente advertencia:
+Partes de este software tienen copyright © 2020 del proyecto FreeType Project (www.freetype.org). Todos los derechos resevados.
+@end inlanguage
+@end macro
+
+
+@macro credit_enet
+@in_language en default mandatory_language
+[color=blue]ENet[/color]
+The Godot engine uses ENet, and includes it in builds by default. Since I haven't removed its functionality from my builds even though my game doesn't need it, here's the notice it wants me to include:
+
+ Copyright (c) 2002-2020 Lee Salzman
+@in_language da
+Godot-spilmotoren bruger ENet, and og inkluderer det som standard. Da jeg ikke har fjernet dets funktionalitet fra mine udgaver af mine spil selvom mit spil ikke har brug for det, følger den meddelelse som de vil have med:
+
+ Copyright (c) 2002-2020 Lee Salzman
+@in_language es
+[color=blue]ENet[/color]
+El motor de juego Godot usa ENet, y lo incluye por defecto. Dado que no he quitado su funcionalidad de esta versión de este juego a pesar de que el juego no la necesita, aquí va la advertencia que me hace incluir:
+
+ Copyright (c) 2002-2020 Lee Salzman
+@end in_language
+@use license_mit
+@end macro
+
+@macro credit_mbedtls
+@in_language en default mandatory_language
+[color=blue]mbed TLS[/color]
+Another thing Godot includes by default and I haven't bothered turning off even though I don't really need it is mbed TLS. That, just like the Roboto font, is under the Apache License:
+
+ Copyright The Mbed TLS Contributors
+@in_language da
+[color=blue]mbed TLS[/color]
+En anden ting Godot-spilmotoren har med som standard og som jeg ikke har orket at slå fra selvom jeg ikke rigtig har brug for det er mbed TLS. Den er, ligesom Roboto-skrifttypen, under Apache-Licensen:
+
+ Copyright Mbed TLS' Bidragsydere
+@in_language es
+[color=blue]mbed TLS[/color]
+Otra cosa que Godot incluye por defecto y que no me he esforzado por desactivar a pesar de no necesitarla es mbed TLS, que, igual que la fuente tipográfica Roboto, está bajo la Licencia Apache:
+
+ Copyright Los contributores de Mbed TLS
+@end in_language
+@use license_apache
+@end macro
+
+@macro credit_godot_and_deps
+@action = var:has_translations > 1 action:size meta:languages
+@rem probably account for cases where we care about specific languages
+@if var:has_translations
+@useonce translation_included
+@end if
+
+@use credit_godot
+
+@use credit_freetype
+
+@use credit_enet
+
+@use credit_mbedtls
+@end macro

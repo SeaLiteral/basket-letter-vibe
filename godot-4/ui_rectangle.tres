@@ -6,3 +6,7 @@
 shader = ExtResource("1")
 shader_parameter/common_alpha = 0.7
 shader_parameter/border_collie = Vector3(1, 0.5, 0.5)
+shader_parameter/background_color = Vector3(1, 1, 1)
+shader_parameter/border_limits = Vector2(0.01, 0.04)
+shader_parameter/corner_alpha = 0.0
+shader_parameter/color_bleed = 0.0

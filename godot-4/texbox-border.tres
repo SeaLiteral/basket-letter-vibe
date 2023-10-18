@@ -1,0 +1,12 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bde18i874yy54"]
+
+[ext_resource type="Shader" path="res://UI-rectangle.gdshader" id="1_ty41b"]
+
+[resource]
+shader = ExtResource("1_ty41b")
+shader_parameter/common_alpha = 0.7
+shader_parameter/border_collie = Vector3(1, 0.5, 0.5)
+shader_parameter/background_color = Vector3(1, 1, 1)
+shader_parameter/border_limits = Vector2(0.01, 0.04)
+shader_parameter/corner_alpha = 0.0
+shader_parameter/color_bleed = 0.0

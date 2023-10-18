@@ -17,18 +17,52 @@
 @rem LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 @rem OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 @rem SOFTWARE.
+
+@start choice left_or_right
+	@start option
+		set text@en "Left"
+		set text@da "Venstre"
+		set text@es "El izquierdo"
+		set action goto go_left
+	@end option
+	@start option
+		set text@en "Right"
+		set text@da "Højre"
+		set text@es "El derecho"
+		set action goto go_right
+	@end option
+@end choice
+
+@start character Vibe
+set name "Vibe"
+set name@es "Avefría"
+set deco_color 0.369 0.212 0.490
+@end character
+
 @chapter intro
 @hide sprite
 @anim camera_idle
 
+@show sprite
+@rem @speaker Vibe
 en=Hi! This is a test. And apparently it's working.
 da=Hej! Dette er en prøve. Og det lader til at den virker.
 es=¡Hola! Esto es una prueba. Y parece que funciona.
 
-@show sprite
-en=Configuration is often done by wizards, but here's a witch that doesn't want to configure anything.
-da=Computere virker helt magiske. Men oversættelsesbesværgelsen kunne ikke håndtere ordspillet der skulle være her.
-es=En inglés hay un juego de palabras aquí que no logro traducir, ni con brujería. 
+en=Vibe::There's enough configuration wizards out there. Here's a default settings witch!
+da=Vibe::Brugte man computere i middelalderen havde man nok fået en trold-dom. Det sker heldigvis ikke mere.
+es=Vibe::Los ordenadores parecen brujería. Me encantan.
+
+en=Do you think I should be in the left or right side of the screen?
+da=Mener du at jeg bør være i højre eller venstre side af skærmen?
+es=¿Te parece que debo estar en el lado derecho o izquierdo de la pantalla?
+
+@choice left_or_right
+
+@label go_left
+en=Nice! You realised I was left-handed.
+da=Fint! Du opdagede jeg var venstrehåndet.
+es=¡Bien! Te fijaste que soy zurda.
 
 en=Let me move the camera...
 da=Lad mig lige bevæge kameraet...
@@ -48,12 +82,17 @@ en=I can do a lot,
    with the stuff I've got.
 da=Jeg kan gøre en masse
    med min værktøjskasse.
-es=Muchas cosas puedo
-   hacer con lo que tengo.
+es=Son muchas las cosas que puedo
+   hacer con las cosas que tengo.
 
 en=Okay, that came out better in some languages than others.
 da=Okay, det fungerede ikke lige godt på alle sprog.
 es=Vaya, esto no funcionó igual de bien en los tres idiomas.
+
+@label go_right
+en=Look at my wand. Why do you think I'm holding it in the left hand?
+da=Se min tryllestav. Hvorfor mon jeg holder den i venstre hånd?
+es=Mira mi varita. ¿Por qué crees que la tengo en la mano izquierda?
 
 en=Well, I guess I don't have much else to show. Bye!
 da=Nå, jeg tror ikke jeg har meget andet at vise. Farvel!

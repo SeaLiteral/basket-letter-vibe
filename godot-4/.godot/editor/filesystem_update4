@@ -1,8 +1,7 @@
 res://default_env.tres
-res://countryside_with_lamb.tscn
-res://default_theme.tres
 res://vn.tscn
-res://controls_en.txt
-res://controls_da.txt
-res://controls_es.txt
+res://default_theme.tres
+res://UI-rectangle.gdshader
+res://texbox-border.tres
+res://ui_rectangle.tres
 res://vn_ui.gd
