@@ -1,5 +1,5 @@
 2a60927148abd1d33b818b535e306557
-::res://::1697664016
+::res://::1697666877
 background.gdshader::Shader::-1::1695150848::0::1::::<><>::
 button-material.tres::ShaderMaterial::2859423748610522806::1693253497::0::1::::<><>::res://image-button.gdshader
 button_normal.tres::StyleBoxFlat::363585253464364362::1693253521::0::1::::<><>::
@@ -11,8 +11,8 @@ credits_da.txt::TextFile::-1::1694950746::0::1::::<><>::
 credits_en.txt::TextFile::-1::1693514750::0::1::::<><>::
 credits_es.txt::TextFile::-1::1693516225::0::1::::<><>::
 credits_macros.txt::TextFile::-1::1694986851::0::1::::<><>::
-default_env.tres::Environment::6787210448061514275::1697649401::0::1::::<><>::
-default_theme.tres::Theme::1027369651826054953::1697643030::0::1::::<><>::uid://bov2u1poimril<>uid://b5c4wc42gldw3<>uid://fgegwt0k3kni<>uid://lyjns3mn37e7<>uid://cvfjk8585prf2<>uid://ct6p8776kvtka<>uid://bdddq3cyr0v6n<>uid://bgxrdf4n8s4vp
+default_env.tres::Environment::6787210448061514275::1697666011::0::1::::<><>::
+default_theme.tres::Theme::1027369651826054953::1697664125::0::1::::<><>::uid://bov2u1poimril<>uid://b5c4wc42gldw3<>uid://fgegwt0k3kni<>uid://lyjns3mn37e7<>uid://cvfjk8585prf2<>uid://ct6p8776kvtka<>uid://bdddq3cyr0v6n<>uid://bgxrdf4n8s4vp
 dynamic_font.tres::FontFile::3414092891570050367::1693253537::0::1::::<><>::res://fontdata.tres
 export_presets.cfg::TextFile::-1::1693259744::0::1::::<><>::
 fontdata.tres::FontFile::2792386339021390717::1693253550::0::1::::<><>::
@@ -27,13 +27,13 @@ logo_shader.gdshader::Shader::-1::1683564648::0::1::::<><>::
 scrollbar-focused.tres::StyleBoxFlat::2856072288174994893::1693253588::0::1::::<><>::
 scrollbar.tres::StyleBoxFlat::6171396524578684104::1693253600::0::1::::<><>::
 slider-box.tres::StyleBoxFlat::4498014979679566700::1693253608::0::1::::<><>::
-texbox-border.tres::ShaderMaterial::2606882771293233225::1697643030::0::1::::<><>::res://UI-rectangle.gdshader
+texbox-border.tres::ShaderMaterial::2606882771293233225::1697664125::0::1::::<><>::res://UI-rectangle.gdshader
 text_theme.tres::Theme::4628238135486616431::1693253614::0::1::::<><>::uid://bov2u1poimril
-UI-rectangle.gdshader::Shader::-1::1697643030::0::1::::<><>::
-ui_rectangle.tres::ShaderMaterial::4523918108730351595::1697649401::0::1::::<><>::res://UI-rectangle.gdshader
-vn.tscn::PackedScene::8733421344032995829::1697649401::0::1::::<><>::res://vn_ui.gd<>res://background.gdshader<>uid://crah36nitn1tb<>uid://cicdlfnvknwx8<>uid://c2m5p577fn1ui<>uid://bcepku8rojeli<>uid://ovwvmbp4e3mr<>uid://bde18i874yy54<>uid://b5pojgp2b60r4<>uid://bov2u1poimril<>res://invisible_but_drawn.gdshader<>res://logo_shader.gdshader<>uid://7einvjkmm3lj<>uid://bvmwf5ak43oda
+UI-rectangle.gdshader::Shader::-1::1697664125::0::1::::<><>::
+ui_rectangle.tres::ShaderMaterial::4523918108730351595::1697666011::0::1::::<><>::res://UI-rectangle.gdshader
+vn.tscn::PackedScene::8733421344032995829::1697666011::0::1::::<><>::res://vn_ui.gd<>res://background.gdshader<>uid://crah36nitn1tb<>uid://cicdlfnvknwx8<>uid://c2m5p577fn1ui<>uid://bcepku8rojeli<>uid://ovwvmbp4e3mr<>uid://bde18i874yy54<>uid://b5pojgp2b60r4<>uid://bov2u1poimril<>res://invisible_but_drawn.gdshader<>res://logo_shader.gdshader<>uid://7einvjkmm3lj<>uid://bvmwf5ak43oda
 vn_script.txt::TextFile::-1::1697645196::0::1::::<><>::
-vn_ui.gd::GDScript::-1::1697649401::0::1::::<>Node2D<>::
+vn_ui.gd::GDScript::-1::1697666011::0::1::::<>Node2D<>::
 ::res://art/::1693517223
 landskab.png::CompressedTexture2D::5966528379107182279::1693435340::1693435368::1::::<><>::
 medium-witch.png::CompressedTexture2D::2535985597052969110::1693511181::1693512531::1::::<><>::

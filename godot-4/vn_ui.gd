@@ -894,15 +894,22 @@ func create_text_screen(screen_text, stay_in_menu):
 		var praf = i
 		for format_mark in ['[color=blue]', '[color=#800]', '[/color]']:
 			praf = praf.replace(format_mark, '')
-		if praf.begins_with('[url]'):
-			for punctuation_pair in ['. dot', ' |slash', ': colon',
-									'[url] ', '[/url]']:
+		if praf.find('[url]')!=-1:
+			for punctuation_pair in ['[url] ', '[/url] ',
+									'. dot', '/ slash', ': colon',
+									'- hyphen', '# hash', '_ underscore',
+									'& ampersand', '% percent', '@ at_sign',
+									'+ plus', '? question_mark', '= equal_sign',
+									'www w_w_w',
+									]:
 				var punctuation_mark = punctuation_pair.split(' ')
+				punctuation_mark[1]=' '+punctuation_mark[1].replace('_', ' ')+' '
 				praf = praf.replace(punctuation_mark[0], punctuation_mark[1])
 		praf = praf.replace('\n','.\n').replace(':.\n',':\n')
 		for number in '0123456789':
 			praf = praf.replace('.'+number, ' '+tr('VOICE_DECIMAL_POINT')+' '+number)
 		vn_screen_text.append(praf)
+		##print('praf: ',praf)
 	var use_label = ui['screen_textbox']
 	use_label.bbcode_enabled = true
 	use_label.text = screen_text
