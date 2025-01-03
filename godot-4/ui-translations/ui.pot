@@ -2,6 +2,16 @@
 msgid ""
 msgstr ""
 
+# Language names in all languages
+msgid "LANG_DA"
+msgstr ""
+
+msgid "LANG_EN"
+msgstr ""
+
+msgid "LANG_ES"
+msgstr ""
+
 # MM is short for "main menu", used for main menu entries
 msgid "MM_CONTINUE"
 msgstr ""
@@ -141,4 +151,41 @@ msgid "QM_MENUS"
 msgstr ""
 
 msgid "VOICE_DECIMAL_POINT"
+msgstr ""
+
+# SN: Screen names (read aloud when viewing a menu in self-voicing mode)
+msgid "SN_MAIN"
+msgstr ""
+
+msgid "SN_INGAME"
+msgstr ""
+
+msgid "SN_LANGUAGE"
+msgstr ""
+
+msgid "SN_LOAD"
+msgstr ""
+
+msgid "SN_CHOICE"
+msgstr ""
+
+msgid "SN_ACCESSIBILITY"
+msgstr ""
+
+msgid "SN_SOUND"
+msgstr ""
+
+msgid "SN_TEXT"
+msgstr ""
+
+msgid "SN_SETTINGS"
+msgstr ""
+
+msgid "SN_CREDITS"
+msgstr ""
+
+msgid "SN_HELP"
+msgstr ""
+
+msgid "SN_HISTORY"
 msgstr ""

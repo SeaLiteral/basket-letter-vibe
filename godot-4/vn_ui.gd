@@ -29,14 +29,15 @@ const CHAPTER_ENDED = 65536
 var released_change = 100.0
 var released_limit = 0.0
 var vn_position = 0
-var vn_chapter = 'intro'#null
-var vn_anim_dict = {}
+@export var vn_chapter: String = '_intro'#null
+var vn_anim_dict: Dictionary = {}
+var vn_anim_follow: Dictionary = {}
 var vn_text = ["."]
 var vn_speaker_changes = {}
 var vn_characters = {
-	"": {
-		"name": "",
-		"deco_color": Vector3(1.0, 0.5, 0.5)
+	"@NARRATOR": {
+		"$name": ['"'],
+		",border_collie": PackedStringArray(['_{', '.1.0', '.1.0', '.1.0', '_}'])
 	}
 }
 
@@ -65,11 +66,14 @@ var vn_configuration = {
 
 var qm_buttons = {
 	"back": go_backwards,
-	"skip": toggle_skipping,
-	"auto": toggle_auto,
+	"skip": toggle_skipping_to,
+	".skip": toggle_skipping,
+	"auto": toggle_auto_to,
+	".auto": toggle_auto,
 	"history": create_history_screen_from_game,
 	"menus": toggle_menu
 }
+var qm_last_press = ""
 
 var known_text_modes = ["CHARACTERS", "INSTANT", "WORDS"]
 var vn_previous_text_mode = "CHARACTERS"
@@ -90,15 +94,16 @@ var vn_labels_to_chapters={}
 var current_label_stack = []
 var current_label_index = 0
 var largest_label_index = 0
-var vn_internal_speaker = ''
+var vn_internal_speaker: String = ''
 var vn_chapter_names = {}
 var vn_label_names = {}
-var vn_first_chapter = 'intro'
+var vn_first_chapter = '_intro'
 var vn_savedata_filename = "user://balevi.txt"
 @export var vn_languages: PackedStringArray = ['en', 'da', 'es']
+@export var vn_language_names: Dictionary = {'en':'English', 'da':'Dansk', 'es':'Español'}
 @export var vn_text_filename: String = 'res://vn_script.txt'
 ###var vn_running_buttons = {}
-var vn_use_text_buttons = false
+@export var vn_use_text_buttons = false
 
 var vn_screen_text = []
 var vn_screen_highlight = -1
@@ -113,9 +118,8 @@ var input_mouse_undoing = 0
 var input_mouse_undone = 0.0
 var input_vertical = 0
 var input_horizontal = 0
-var input_skipping = false
+#var input_skipping = false
 var next_skip_delay = 0.0
-var input_autoing = false
 var next_auto_delay = 0.0
 
 var vn_tts=[]
@@ -124,6 +128,23 @@ var ui_data = {}
 
 var ui={}
 var vn_sprites = {}
+var blv_keywords = ['_FOLLOW', '_ANIMATE', '_SHOW', '_HIDE', '_SPEAKER',
+					'_CHAPTER', '_LABEL', '_CHARACTER', '_REM']
+
+var pv_last_speaker: StringName
+var pv_parsing_chapter: StringName
+var pv_last_anim: StringName
+
+var qm_toggles: Dictionary = { # TODO: Store auto state when paused
+	'auto': false,
+	'skip': false,
+}
+func qm_set_toggle(name: String, value: int):
+	var prev_val = qm_toggles[name]
+	var new_value = bool(value)
+	if value==-1: not prev_val
+	qm_toggles [name] = new_value
+	ui['qm_'+name].set_pressed (new_value)
 
 func stop_highlighting():
 	#highlight_group = "LEAVE"
@@ -141,38 +162,6 @@ func get_file_text(file_name):
 		read_contents += found_line +"\n"
 	read_file.close()
 	return (read_contents)
-
-func get_string_linebreaks(text, width):
-	var current_line = ""
-	var found_breaks = []
-	var character_count=0
-	var last_space = -1
-	for character in text:
-		if (character=='\n'):
-			found_breaks.append(character_count)
-			current_line = ""
-		elif (character==' '):
-			var current_pixel_length=text_font.get_string_size(current_line+' ',
-										HORIZONTAL_ALIGNMENT_LEFT, -1,
-										vn_theme.default_font_size).x
-			##print(current_line, ": ", current_pixel_length, " ", width)
-			if (current_pixel_length>width):
-				found_breaks.append(last_space)
-				current_line = ""
-			else:
-				current_line += ' '
-				last_space = character_count
-		#elif (not ' ' in current_line):
-		#	pass # FIXME: handle words that don't fit
-		else:
-			current_line += character
-		character_count += 1
-	var current_pixel_length = text_font.get_string_size(current_line,
-										HORIZONTAL_ALIGNMENT_LEFT, -1,
-										vn_theme.default_font_size).x
-	if (current_pixel_length>width):
-		found_breaks.append(last_space)
-	return found_breaks
 
 func unquote_string(text):
 	var new_value = ''
@@ -260,6 +249,282 @@ func get_tokens(text:String) -> Array:
 	#print('parsed line: ', results)
 	return [line_state, results]
 
+func tokenise_text(in_text: String)->PackedStringArray:
+	var out_tokens: PackedStringArray = []
+	var current_part: String =''
+	var inside_string: bool = false
+	var escaping: bool = false
+	var inside_dialogue: bool = false
+	var held_text: String = ''
+	var after_held: bool = false
+	var ch_i: int = 0
+	while (ch_i<len(in_text)):
+		var ch: String = in_text[ch_i]
+		if inside_string:
+			if escaping:
+				current_part += ch
+				escaping = false
+			elif ch == '\\': escaping = true
+			elif ch == '"': inside_string = false
+			else: current_part += ch
+		elif inside_dialogue:
+			if ch in '\v\n':
+				held_text = current_part
+				current_part = ''
+				inside_dialogue = false
+			else:
+				current_part += ch
+		elif held_text and (ch in ' \t') and (current_part == ''):
+			after_held = true
+		elif after_held and ch in '\v\n':
+			out_tokens.append(held_text)
+			held_text = ''
+			after_held = false
+		elif after_held:
+			current_part = held_text + '\n' + ch
+			held_text = ''
+			after_held = false
+			inside_dialogue = true # This is right, right?
+		elif held_text:
+			after_held = false
+			out_tokens.append(held_text)
+			held_text = ''
+			ch_i -= 1
+		elif current_part == '':
+			if ch=='"':
+				inside_string = true
+				current_part = '"'
+			elif ch in '@_#%$,^':
+				current_part = ch
+			elif ch=='=':
+				current_part = '='
+				inside_dialogue = true
+			elif ch.is_valid_int():
+				current_part = '0'+ch
+			elif ch in ' \t\n\v':
+				pass
+			else:
+				current_part = '_'+ch
+		elif ch in ' \t\n\v':
+			out_tokens.append(current_part)
+			current_part=''
+		elif (current_part[0]=='0') and (not ch.is_valid_int()):
+			if ch=='.':
+				current_part[0] = '.'
+				current_part += ch
+			else:
+				current_part[0] = 'E'
+				current_part += ch
+		elif (current_part[0]=='.') and (not ch.is_valid_int()):
+			current_part[0] = 'E'
+			current_part += ch
+		elif current_part[0] in '@_#%$,^0.E':
+			current_part += ch
+		if ((len(out_tokens)>0) and (out_tokens[len(out_tokens)-1]!='\n') and
+			(ch in '\n\v') and (current_part=='')):
+			out_tokens.append('\n')
+		ch_i += 1
+	if current_part!='':
+		out_tokens.append(current_part)
+	return out_tokens
+
+func is_block(in_tokens: PackedStringArray, start_index: int)->bool:
+	var found_is: bool = false
+	var token_index: int = start_index # Probably not necessary in this language
+	while(token_index<len(in_tokens)):
+		if in_tokens[token_index]=='_IS': found_is = true
+		if in_tokens[token_index]=='\n':
+			return found_is
+		token_index += 1
+	return found_is
+
+var vn_basic_ints: Dictionary = {}
+var vn_basic_floats: Dictionary = {}
+var vn_basic_strings: Dictionary = {}
+
+func strings_from_basic(tokens: PackedStringArray, remove_prefix=false)->PackedStringArray:
+	tokens.reverse()
+	var source_stack:PackedStringArray = [' ',' ',' ',' ',' ',' ',' ',' ']
+	var source_current_depth = 0
+	for tok in tokens:
+		if tok[0] in '#$%0."':
+			if source_current_depth < len(source_stack):
+				source_stack[source_current_depth] = tok
+				source_current_depth += 1
+			else:
+				source_stack.append(tok)
+				source_current_depth += 1
+		elif tok[0] in '_!':
+			if tok in ['_{', '_}']:
+				var optok: String = '_{'
+				if tok == '_{': optok = '_}'
+				if source_current_depth < len(source_stack):
+					source_stack[source_current_depth] = optok
+					source_current_depth += 1
+				else:
+					source_stack.append(optok)
+					source_current_depth += 1
+			elif tok == '_ADD#':
+				if len(source_stack)<2:
+					return ['ERROR: integer addition without integers']
+				var new_param_1: String = source_stack[source_current_depth-1]
+				var new_param_2: String = source_stack[source_current_depth-2]
+				if new_param_1[0] not in '0#':
+					return ['ERROR: integer addition with non-integer source']
+				if new_param_2[0] not in '0#':
+					return ['ERROR: integer addition with non-integer source']
+				# For one input:
+				var new_input_1: int = 0
+				if new_param_1[0] == '#':
+					if new_param_1 not in vn_basic_ints:
+						return ['ERROR: integer addition with undefined variable']
+					new_input_1 = vn_basic_ints[new_param_1]
+				else:
+					var probably_an_int: String = new_param_1.substr(1)
+					if not probably_an_int.is_valid_int():
+						return ['ERROR: addition stumbled on tokenisation error']
+					new_input_1 = probably_an_int.to_int()
+				# Same for the other input:
+				var new_input_2: int = 0
+				if new_param_2[0] == '#':
+					if new_param_2 not in vn_basic_ints:
+						return ['ERROR: integer addition with undefined variable']
+					new_input_2 = vn_basic_ints[new_param_2]
+				else:
+					var probably_an_int: String = new_param_2.substr(1)
+					if not probably_an_int.is_valid_int():
+						return ['ERROR: addition stumbled on tokenisation error']
+					new_input_2 = probably_an_int.to_int()
+				# End of repeated section
+				var new_sum = new_input_1 + new_input_2
+				source_stack[source_current_depth-2] = ("0%d" % new_sum)
+				source_current_depth -= 1
+	if source_current_depth == 0:
+		return ['ERROR: No value']
+	var final_value:PackedStringArray = []
+	var last_element:String = source_stack[0]
+	if last_element[0] in '#%$':
+		if last_element[0] == '#':
+			last_element = '"'+vn_basic_ints[last_element]
+		if last_element[0] == '%':
+			last_element = '"'+vn_basic_floats[last_element]
+		elif last_element[0] == '$':
+			last_element = '"'+vn_basic_strings[last_element]
+		if remove_prefix and (last_element[0] in '0."'):
+			last_element = last_element.substr(1)
+		final_value.append(last_element)
+	else:
+		var count_elems: int = 0
+		for i in source_stack:
+			if remove_prefix and (i[0] in '0."'):
+				i = i.substr(1)
+			final_value.append(i)
+			count_elems += 1
+			if count_elems>=source_current_depth: break
+	return final_value
+
+func one_string_from_basic(tokens: PackedStringArray, remove_prefix=false)->String:
+	var all_strings: PackedStringArray = strings_from_basic(tokens, remove_prefix)
+	return ' '.join(all_strings)
+
+func floats_from_basic(tokens: PackedStringArray)->PackedFloat32Array:
+	var all_strings: PackedStringArray = strings_from_basic(tokens)
+	var all_floats: PackedFloat32Array = []
+	for elem in all_strings:
+		if elem.begins_with('.'):
+			var subelem: String = elem.substr(1)
+			if subelem.is_valid_float():
+				all_floats.append(subelem.to_float())
+	return all_floats
+
+func convert_line(in_line: PackedStringArray)->bool:
+	var end_words: PackedStringArray = ['_CHAREND', '_CHOICEEND', '_OPTEND']
+	if len(in_line)==0: return true
+	if in_line[0][0] == '=':
+		vn_text.append(in_line[0].substr(4))
+	elif in_line[0][0] == '_':
+		if (len(in_line)<2) and not (in_line[0] in end_words):
+			print("Probably too few arguments for ", in_line[0])
+			return false
+		if '_IS' in in_line:
+			var block_properties: Dictionary = {}
+			print("This is an _IS block")
+			if in_line[0]=='_CHARACTER':
+				print("It's a character")
+				var part_line:PackedStringArray = []
+				var block_position: int = 0
+				var block_depth = 0
+				while (block_position<len(in_line)):
+					var tok: StringName = in_line[block_position]
+					if tok=='\n':
+						if '_IS' in part_line:
+							block_depth += 1
+						elif '_CHAREND' in part_line:
+							block_depth -= 1
+						elif block_depth == 1:
+							if len(part_line)==0: pass
+							elif len(part_line)==1:
+								print ("Character property has only one word")
+								return false
+							elif len(part_line)==2:
+								print ("Character property has only two words")
+								return false
+							elif part_line[0] != '_HAS':
+								print ("Character property without _HAS")
+								return false
+							elif len(part_line[1])>=1:
+								# TODO: allow more complex expressions
+								block_properties[part_line[1]] = part_line.slice(2)
+								if '_LET' in block_properties[part_line[1]]:
+									# The double E in "EError" is intentional
+									block_properties[part_line[1]] = ['EError: Assignment in displayable value']
+							else:
+								print("ERROR: Line too short")
+						elif len(part_line)==0: pass
+						else:
+							print ("Wrong depth in character")
+						part_line = []
+						#print(block_properties)
+						print ("Adding character:")
+						print(in_line[1])
+						vn_characters[in_line[1]]=block_properties
+					else:
+						part_line.append(tok)
+					block_position += 1
+				return true
+		if '_DO' in in_line:
+			if in_line[0]=='_CHOICE':
+				return true
+		if in_line[0]=='_CHAPTER':
+			vn_chapter_positions[in_line[1]]=len(vn_text)
+			vn_chapter_names[len(vn_text)]=in_line[1]
+			return true
+		if in_line[0]=='_FOLLOW':
+			return true # TODO
+		if in_line[0]=='_ANIMATE': # TODO: probably support WIth
+			var animation_name = ''
+			var animation_player = ''
+			if len(in_line)<3: return false
+			animation_player = in_line[1]
+			animation_name = in_line[2]
+			if pv_last_anim in vn_anim_follow:
+				pv_last_anim = vn_anim_follow[pv_last_anim]
+			vn_anim_dict[len(vn_text)]=[animation_name, pv_last_anim, animation_player]
+			pv_last_anim = animation_name
+			return true # TODO
+		if in_line[0]=='_SPEAKER':
+			vn_speaker_changes[len(vn_text)]=[in_line[1], pv_last_speaker]
+			pv_last_speaker = in_line[1]
+			return true
+		if in_line[0]=='_LABEL':
+			vn_label_positions[in_line[1]]=len(vn_text)
+			vn_label_names[len(vn_text)]=in_line[1]
+			vn_labels_to_chapters[in_line[1]] = pv_parsing_chapter
+			return true
+		#print(in_line)
+		return false
+	return true
+
 func load_vn_script(text_filename, target_language):
 	var vn_contents = get_file_text(text_filename)
 	if vn_contents == null:
@@ -269,6 +534,7 @@ func load_vn_script(text_filename, target_language):
 	vn_text = []
 	vn_text_linebreaks = {}
 	vn_anim_dict = {}
+	vn_anim_follow = {}
 	vn_showhide_dict = {}
 	vn_chapter_positions = {}
 	vn_label_positions = {}
@@ -276,7 +542,7 @@ func load_vn_script(text_filename, target_language):
 	vn_labels_to_chapters = {}
 	vn_choice_events={}
 	vn_chapter_names = {}
-	vn_speaker_changes = {}
+	vn_speaker_changes = {0:['@NARRATOR','@NARRATOR']}
 	var last_text = ""
 	var last_language=""
 	var last_anim = "camera_idle"
@@ -287,159 +553,34 @@ func load_vn_script(text_filename, target_language):
 	var parsing_chapter = ' '
 	var new_choice: Array = []
 	var new_option: Dictionary = {}
-	for vn_line in vn_contents.split("\n"):
-		if is_new>0:
-			if vn_line.begins_with('en='):
-				print('Error: This line should not be new!', new_type)
-			if vn_line.begins_with("@end"):
-				is_new -= 1
-				if (is_new==0) and (new_type=='choice'):
-					vn_choices[new_name]=new_choice
-					print('adding a new choice: ', new_name, ' is ', new_choice)
-			elif new_type=='character': # TODO: rewrite to use the line parser
-				if vn_line.begins_with('set '):
-					var separator_position = vn_line.find(' ', 6)
-					##print(vn_line, str(separator_position))
-					var var_name = vn_line.substr(4, separator_position-4)
-					var var_value = vn_line.substr(separator_position+1)
-					##print(var_name, '=', var_value)
-					if (var_name=='name') or (var_name.begins_with('name@')):
-						if var_value.begins_with('"'):
-							var_value = unquote_string(var_value)
-						vn_characters[new_name][var_name]=var_value
-						##print('setting name ', var_name, ' to ', var_value)
-					elif var_name.ends_with('_color'):
-						var vector_parts=var_value.split(' ', false)
-						if len(vector_parts)==3:
-							var color_vector = Vector3(-1.0, -1.0, -1.0)
-							if vector_parts[0].is_valid_float():
-								color_vector.x = float(vector_parts[0])
-							if vector_parts[1].is_valid_float():
-								color_vector.y = float(vector_parts[1])
-							if vector_parts[2].is_valid_float():
-								color_vector.z = float(vector_parts[2])
-							if ((color_vector.x>=0.0) and (color_vector.x<=1.0) and
-								(color_vector.y>=0.0) and (color_vector.y<=1.0) and
-								(color_vector.z>=0.0) and (color_vector.z<=1.0)):
-								vn_characters[new_name][var_name]=color_vector
-			elif (new_type=='choice'):
-				var line_parts = get_tokens(vn_line)
-				if line_parts[0]==GT_line_state.ERROR:
-					print ('Error: tokenisation failed!')
-				elif len(line_parts[1])<1:
-					print ('Error: too few tokens!', vn_line, " ", line_parts)
-				else:
-					var found_tokens = line_parts[1]
-					if found_tokens[0] == '.@start':
-						is_new += 1
-					elif found_tokens[0] == '.@end':
-						is_new -= 1
-						if (is_new==1) and (new_option!={}):
-							new_choice.append(new_option)
-							new_option = {}
-					else:
-						if ((is_new==2) and (found_tokens[0]=='.set') and
-							len(found_tokens)==3):
-							##print(found_tokens)
-							#if found_tokens[1].begins_with('.'):
-							# TODO: actually allow every variable
-							if found_tokens[1]=='.text':
-								new_option['text'] = found_tokens[2]
-							elif found_tokens[1]=='.text@'+target_language:
-								new_option['text'] = found_tokens[2]
-						elif ((is_new==2) and (found_tokens[0]=='.set') and
-							len(found_tokens)==4):
-							if found_tokens[1]=='.action':
-								new_option['action'] = [found_tokens[2],
-														found_tokens[3]]
-				if is_new==0:
-					print('adding new choice')
-					vn_choices[new_name]=new_choice
+	var current_line: PackedStringArray = []
+	var prev_tok: StringName = ''
+	var parsing_block: int = 0
+	var count_lines = 0
+	for tok in tokenise_text(vn_contents):
+		if tok=='\n':
+			var tokens_on_line = len(current_line)
+			#print(tokens_on_line)
+			if len(current_line)==0: pass
+			elif current_line[0] == '_REM':
+				current_line = []
+			elif prev_tok in ['_IS', '_DO']:
+				current_line.append(tok)
+				parsing_block += 1
+			elif parsing_block>0:
+				current_line.append(tok)
 			else:
-				print('Error: unknown type: ', new_type)
-		else: # is_new == 0
-			if ((vn_line=="") and (last_text!="")):
-				vn_text.append(last_text)
-				print('added a line')
-				#vn_text_linebreaks.append(get_string_linebreaks(last_text, text_box_width))
-				last_text = ""
-			elif vn_line.begins_with("@"):
-				##print('looking at a command')
-				var line_words = vn_line.split(" ")
-				if line_words[0]=="@anim":
-					# print (len(vn_text))
-					var next_animation = "camera_idle"
-					if len(line_words)>1:
-						var animation_name = line_words[1]
-						if animation_name == "camera_down":
-							next_animation="camera_liedown"
-						vn_anim_dict[len(vn_text)]=[animation_name, next_animation, last_anim]
-						last_anim = next_animation
-				elif line_words[0] in ["@show", "@hide"]:
-					if len(line_words)==2:
-						vn_showhide_dict[len(vn_text)]=line_words
-				elif line_words[0] == '@speaker':
-					vn_speaker_changes[len(vn_text)]=[line_words[1], last_speaker]
-					last_speaker = line_words[1]
-				if line_words[0]=="@chapter":
-					if (len(line_words)>1):
-						vn_chapter_positions[line_words[1]]=len(vn_text)
-						vn_chapter_names[len(vn_text)]=line_words[1]
-						parsing_chapter = line_words[1]
-				if line_words[0]=="@label":
-					if (len(line_words)>1):
-						vn_label_positions[line_words[1]]=len(vn_text)
-						vn_label_names[len(vn_text)]=line_words[1]
-						vn_labels_to_chapters[line_words[1]] = parsing_chapter
-				if line_words[0]=="@choice":
-					if (len(line_words)>1):
-						vn_choice_events[len(vn_text)]=line_words[1]
-						vn_text.append('')
-				if line_words[0]=='@start':
-					is_new += 1
-					new_type=''
-					new_name=''
-					if len(line_words)>1:
-						##print('it has a type')
-						new_type=line_words[1]
-					if len(line_words)>2:
-						new_name=line_words[2]
-					if new_type=='character':
-						if new_name not in vn_characters:
-							vn_characters[new_name]={}
-			elif (vn_line.begins_with(target_language+"=")):
-				##print('looking at a line')
-				last_text = vn_line.substr(3)
-				last_language=target_language
-				if '::' in last_text:
-					var speaker_separator = '::'
-					var separator_position = vn_line.find(speaker_separator)-1
-					var new_speaker = last_text.substr(0,
-										separator_position-len(speaker_separator))
-					last_text = last_text.substr(separator_position)
-					vn_speaker_changes[len(vn_text)]=[new_speaker, last_speaker]
-					last_speaker = new_speaker
-				###
-			elif (len(vn_line)>3):
-				##print('looking at another translation')
-				if vn_line[2]=='=':
-					last_language=vn_line.split('=')[0]
-					if (last_text!=""):
-						vn_text.append(last_text)
-						#vn_text_linebreaks.append(get_string_linebreaks(last_text, text_box_width))
-					last_text = ""
-				elif ((last_language==target_language) and (vn_line.begins_with("   "))):
-					last_text += "\n"+(vn_line.substr(3))
-			elif vn_line=="":
-				pass
-	if last_text!="":
-		vn_text.append(last_text)
-		#vn_text_linebreaks.append(get_string_linebreaks(last_text, text_box_width))
-	##print(vn_speaker_changes)
-	print('choices: ', vn_choice_events)
-	for i in vn_label_positions:
-		print('label: ', i, ' at ', vn_label_positions[i])
-	print(vn_choices)
+				convert_line(current_line)
+				count_lines += 1
+				current_line = []
+		else:
+			current_line.append(tok)
+			if parsing_block>0:
+				if tok in ['_CHAREND', '_CHOICEND', '_OPTEND']:
+					parsing_block -= 1
+		prev_tok = tok
+	print(count_lines)
+	return # function ends here
 
 func get_initial_language():
 	if ('text_language' in vn_configuration):
@@ -481,8 +622,25 @@ func perhaps_read(text, forced_speech=false):
 		return
 	if (len(vn_tts)==0):
 		return
+	var praf = text
+	for format_mark in ['[color=blue]', '[color=#800]', '[/color]']:
+		praf = praf.replace(format_mark, '')
+	if praf.find('[url]')!=-1:
+		for punctuation_pair in ['[url] ', '[/url] ',
+							'. dot', '/ slash', ': colon',
+							'- hyphen', '# hash', '_ underscore',
+							'& ampersand', '% percent', '@ at_sign',
+							'+ plus', '? question_mark', '= equal_sign',
+							'www w_w_w',
+							]:
+			var punctuation_mark = punctuation_pair.split(' ')
+			punctuation_mark[1]=' '+punctuation_mark[1].replace('_', ' ')+' '
+			praf = praf.replace(punctuation_mark[0], punctuation_mark[1])
+	praf = praf.replace('\n','.\n').replace(':.\n',':\n')
+	for number in '0123456789':
+		praf = praf.replace('.'+number, ' '+tr('VOICE_DECIMAL_POINT')+' '+number)
 	DisplayServer.tts_stop()
-	DisplayServer.tts_speak(tr(text), vn_tts[0])
+	DisplayServer.tts_speak(tr(praf), vn_tts[0])
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -498,6 +656,8 @@ func _ready():
 		var ui_parts = ui_phrase.split(':')
 		ui[ui_parts[0]]=find_child(ui_parts[1])
 	
+	ui['vn_textbox'].visible_characters_behavior=1
+	
 	# FIXME: I suppose this makes it harder to change the resolution,
 	#        but I guess Godot isn't really designed with that in mind :(
 	ui['vn_textbox_base_position'] = ui['vn_text_container'].get_transform().get_origin()
@@ -507,7 +667,7 @@ func _ready():
 	ui['vn_textbox_inner_size']=ui['vn_textbox'].size
 	vn_sprites['witch']=find_child("witch_sprite")
 	vn_sprites['animation_player']=$landskab/sprites
-	vn_sprites['content']=$landskab/sprites/Node2D
+	#vn_sprites['content']=$landskab/sprites/Node2D
 	vn_configuration['text_cps']=50.0
 	vn_configuration['font_size']=50
 	vn_configuration['game_title']='BLV Example Game'
@@ -531,6 +691,12 @@ func _ready():
 	#text_font = ui['vn_textbox'].normal_font
 	vn_theme = load("res://default_theme.tres")
 	vn_theme.default_font_size = vn_configuration['font_size']
+	#print(vn_theme.get_type_list())
+	for i in ["Label", "RichTextLabel", "TooltipLabel"]:
+		print(i)
+		var i1=(vn_theme.get_color_list(i))
+		for j in i1:
+			print(vn_theme.get_color(j, i))
 	text_font = vn_theme.default_font #ui['vn_textbox'].get_theme_default_font()
 	text_default_size=50
 	if not 'text_language' in vn_configuration:
@@ -539,30 +705,48 @@ func _ready():
 		set_language(vn_configuration['text_language'], false)
 	# TODO: Separate quick menu and add tooltips
 	quick_menu = ui['vn_quickmenu']
-	for button_name in ["back", "skip@run", "auto", "history", "menus"]:
+	var button_count: int = 0
+	for button_name in ["back", "skip@run", "auto@run", "history", "menus"]:
 	# ["back", "auto", "skip", "history", "menus"]:
+		if vn_use_text_buttons and (button_count>0):
+			var sep = HSeparator.new()
+			quick_menu.add_child(sep)
 		var has_running_state=false
 		if button_name.ends_with('@run'):
 			button_name=button_name.split('@')[0]
-			###has_running_state=true
+			has_running_state=true
 		var new_button = null
 		if vn_use_text_buttons: new_button= Button.new()
 		else: new_button= TextureButton.new()
+		if has_running_state:
+			new_button.toggle_mode = true
 		new_button.name = "qm_"+button_name
 		if (vn_use_text_buttons):
 			new_button.text = button_name
 		else:
-			var texture_normal = load("res://gui/"+button_name+".png")
-			if has_running_state:
-				var texture_running = load("res://gui/"+button_name+"-running.png")
+			#if has_running_state:
+			#	var texture_running = load("res://gui/"+button_name+"-running.png")
 				###vn_running_buttons[button_name]=[new_button, texture_normal, texture_running]
-			new_button.texture_normal = texture_normal
-			new_button.material = load ("res://button-material.tres")
+			new_button.texture_normal = load("res://gui/"+button_name+".png")
+			#new_button.material = load ("res://button-material.tres")
+			new_button.texture_pressed = load("res://gui/"+button_name+"-focus.png")
+			#new_button.texture_disabled = load("res://gui/"+button_name+"-disabled.png")
+			new_button.texture_hover = load("res://gui/"+button_name+"-focus.png")
 			new_button.texture_focused = load("res://gui/"+button_name+"-focus.png")
 		if button_name in qm_buttons:
-			new_button.connect("pressed", qm_buttons[button_name])
+			if has_running_state:
+				new_button.connect("toggled", qm_buttons[button_name])
+			else:
+				new_button.connect("pressed", qm_buttons[button_name])
+		if has_running_state: new_button.connect("gui_input",
+					redo_if_double_click.bind (qm_buttons['.'+button_name]))
+		else: new_button.connect("gui_input", redo_if_double_click.bind (button_name))
+		new_button.connect("mouse_entered", mouse_entered)
+		new_button.connect("mouse_exited", mouse_exited)
 		quick_menu.add_child(new_button)
+		ui['qm_'+button_name]=new_button
 		##print(new_button)
+		button_count += 1
 	# text_font.get_string_size()
 	ui['animation_camera'].play("camera_idle")
 	print(vn_choices)
@@ -570,6 +754,24 @@ func _ready():
 	animate_position(1)
 	print('showing the menu')
 	show_menu()
+
+func mouse_entered(): print('mouse entered')
+func mouse_exited(): print('mouse exited')
+
+func redo_if_double_click(event: InputEvent, button_name: String):
+	if event is InputEventMouseButton:
+		var what = "released"
+		if event.pressed: what="pressed"
+		elif qm_last_press==button_name:
+			print('Second part of double click')
+			qm_buttons['.'+button_name].call()
+		print("Mouse button "+what+" to ", button_name)
+		if event.double_click:
+			qm_last_press = button_name
+		elif event.canceled:
+			print('Canceled event')
+			qm_last_press = ''
+		else: qm_last_press = ''
 
 func decode_settings(text):
 	vn_sorted_configuration = []
@@ -711,10 +913,12 @@ func update_config_labels(amount_set=null, to_change=[]):
 func create_main_menu():
 	destroy_menu()
 	if vn_position!=0:
+		perhaps_read(tr("SN_INGAME"))
 		create_button("MM_CONTINUE", hide_menu, "MH_CONTINUE")
 		create_button("MM_HISTORY", create_history_screen_from_menu, "MH_HISTORY")
 		create_button("MM_RESTART", start_vn, "MH_RESTART")
 	else:
+		perhaps_read(tr("SN_MAIN"))
 		create_button("MM_PLAY", start_vn, "MH_PLAY")
 	create_button("MM_LOAD", create_load_menu, "MH_LOAD")
 	create_button("MM_LANGUAGE", create_language_menu, "MH_LANGUAGE")
@@ -726,16 +930,21 @@ func create_main_menu():
 	ui["vn_hud"].hide()
 
 func create_language_menu():
+	perhaps_read(tr("SN_LANGUAGE"))
 	destroy_menu()
-	create_button("English", set_language, "English", 'en')
-	create_button("Dansk", set_language, "Danish", 'da')
-	create_button("Español", set_language, "Spanish", 'es')
+	for i in vn_languages:
+		var language_name = vn_language_names[i]
+		create_button(language_name, set_language, tr('LANG_'+(i.to_upper())), i)	
+	#create_button("English", set_language, "English", 'en')
+	#create_button("Dansk", set_language, "Danish", 'da')
+	#create_button("Español", set_language, "Spanish", 'es')
 	create_button("SM_BACK_TO_MENU", create_main_menu, "SH_BACK_TO_MENU")
 	game_state = 'LANGUAGE_MENU'
 	ui['screen_box'].show()
 	ui["vn_hud"].hide()
 
 func create_load_menu():
+	perhaps_read(tr("SN_LOAD"))
 	destroy_menu()
 	create_label("LM_PICK_CHAPTER_LABEL")
 	for chapter in vn_chapter_positions:
@@ -749,23 +958,24 @@ func create_load_menu():
 	ui["vn_hud"].hide()
 
 func create_choice_menu(choice_options):
+	perhaps_read(tr("SN_CHOICE"))
 	destroy_menu()
-	print('choice: ',choice_options)
+	#print('choice: ',choice_options)
 	for option in choice_options:
 		print(option)
 		if not 'text' in option: continue
 		if not 'action' in option: continue
-		print('name and action found')
+		#print('name and action found')
 		# TODO: support other actions
 		if len (option['action']) != 2: continue
-		print('action length OK')
+		#print('action length OK')
 		if option['action'][0] != '.goto': continue
 		var target_label = option['action'][1].substr(1)
 		##print('[', option['text'], ']')
 		var button_text = option['text'].substr(1)
-		print('creating button: <', target_label, '> <', button_text, '>')
+		#print('creating button: <', target_label, '> <', button_text, '>')
 		create_button(button_text, load_label, "", [target_label])
-		print('choice created!')
+		#print('choice created!')
 	
 	game_state = "CHOICE_SUBGAME"
 	ui['screen_box'].show()
@@ -777,35 +987,36 @@ func conditionally_load_chapter(chapter_data):
 	if chapter_name in vn_chapter_positions:
 		start_vn()
 		vn_position = vn_chapter_positions[chapter_name]
-		vn_chapter = null
+		vn_chapter = vn_first_chapter
 		animate_position(0)
 
 func load_label(label_data):
 	var label_name = label_data[0]
-	print ('going to ', label_name)
+	#print ('going to ', label_name)
 	if label_name in vn_label_positions:
-		print(current_label_stack)
-		print(current_label_index)
+		#print(current_label_stack)
+		#print(current_label_index)
 		if ((len(current_label_stack)-1)>current_label_index):
-			print('overwriting position')
+			#print('overwriting position')
 			current_label_index +=1
 			current_label_stack[current_label_index] = [label_name, vn_position]
 			largest_label_index = current_label_index
 		else:
-			print('adding position')
+			#print('adding position')
 			current_label_stack.append([label_name, vn_position])
 			current_label_index += 1
 		vn_position = vn_label_positions[label_name]
 		vn_chapter = vn_labels_to_chapters[label_name]
 		animate_position(0)
 		if (true):
-			print('position when leaving the menu: ',vn_position)
+			#print('position when leaving the menu: ',vn_position)
 			destroy_menu()
 			hide_menu(true)
 	else:
 		print('Error: Label not found!')
 
 func create_accessibility_menu(from_game=true):
+	perhaps_read(tr("SN_ACCESSIBILITY"))
 	destroy_menu()
 	ui_data ['font_size'] = create_slider(
 		"CM_FONT_SIZE", vn_configuration['font_size'],
@@ -827,6 +1038,7 @@ func create_accessibility_menu(from_game=true):
 
 
 func create_audio_menu():
+	perhaps_read(tr("SN_SOUND"))
 	destroy_menu()
 	ui_data ['voice_volume'] = create_slider(
 		"CM_VOICE_VOLUME", vn_configuration["voice_volume"],
@@ -838,6 +1050,7 @@ func create_audio_menu():
 
 
 func create_text_menu():
+	perhaps_read(tr("SN_TEXT"))
 	destroy_menu()
 	ui_data ['text_cps'] = create_slider(
 		"CM_TEXT_CPS", vn_configuration["text_cps"],
@@ -860,6 +1073,7 @@ func create_text_menu():
 	ui["vn_hud"].show() # for previewing stuff ######
 
 func create_config_menu():
+	perhaps_read(tr("SN_SETTINGS"))
 	destroy_menu()
 	create_button("CM_TEXT", create_text_menu, "MH_TEXT")
 	create_button("CM_ACCESSIBILITY", create_accessibility_menu,
@@ -891,25 +1105,7 @@ func create_text_screen(screen_text, stay_in_menu):
 	vn_screen_text = []
 	vn_screen_highlight = -1
 	for i in(screen_text.split("\n\n")):
-		var praf = i
-		for format_mark in ['[color=blue]', '[color=#800]', '[/color]']:
-			praf = praf.replace(format_mark, '')
-		if praf.find('[url]')!=-1:
-			for punctuation_pair in ['[url] ', '[/url] ',
-									'. dot', '/ slash', ': colon',
-									'- hyphen', '# hash', '_ underscore',
-									'& ampersand', '% percent', '@ at_sign',
-									'+ plus', '? question_mark', '= equal_sign',
-									'www w_w_w',
-									]:
-				var punctuation_mark = punctuation_pair.split(' ')
-				punctuation_mark[1]=' '+punctuation_mark[1].replace('_', ' ')+' '
-				praf = praf.replace(punctuation_mark[0], punctuation_mark[1])
-		praf = praf.replace('\n','.\n').replace(':.\n',':\n')
-		for number in '0123456789':
-			praf = praf.replace('.'+number, ' '+tr('VOICE_DECIMAL_POINT')+' '+number)
-		vn_screen_text.append(praf)
-		##print('praf: ',praf)
+		vn_screen_text.append(i)
 	var use_label = ui['screen_textbox']
 	use_label.bbcode_enabled = true
 	use_label.text = screen_text
@@ -920,6 +1116,7 @@ func create_text_screen(screen_text, stay_in_menu):
 		create_button("SM_BACK_TO_MENU", hide_menu, "SH_BACK_TO_GAME")
 
 func create_credits_screen():
+	perhaps_read(tr("SN_CREDITS"))
 	var screen_text = get_file_text ("res://credits_"+vn_configuration["text_language"]+".txt")
 	if screen_text==null:
 		screen_text = tr("ERROR_SCREEN_TEXT_NOT_FOUND")
@@ -927,6 +1124,7 @@ func create_credits_screen():
 	game_state = 'ABOUT_SCREEN'
 
 func create_help_screen():
+	perhaps_read(tr("SN_HELP"))
 	var screen_text = get_file_text ("res://controls_"+vn_configuration["text_language"]+".txt")
 	if screen_text==null:
 		screen_text = tr("ERROR_SCREEN_TEXT_NOT_FOUND")
@@ -934,6 +1132,7 @@ func create_help_screen():
 	game_state = 'HELP_SCREEN'
 
 func create_history_screen(stay_in_menu):
+	perhaps_read(tr("SN_HISTORY"))
 	var history_text = ""
 	var line_count=0
 	var check_position = vn_position-1
@@ -967,7 +1166,7 @@ func start_vn():
 	largest_label_index = 0
 	current_label_stack = [' '] # ' ' should compare unequal to any valid label
 	hide_menu()
-	vn_chapter = null
+	vn_chapter = vn_first_chapter
 	animate_position(1)
 
 func destroy_menu():
@@ -986,12 +1185,14 @@ func animate_position(animate_direction):
 	vn_language_changed = false
 	if vn_position in vn_showhide_dict:
 		var showhide_action = vn_showhide_dict[vn_position]
-		if showhide_action[0]=="@show":
-			vn_sprites['content'].show()
-			vn_sprites['animation_player'].play('witch_idle')
-		elif showhide_action[0]=="@hide":
-			vn_sprites['animation_player'].stop()
-			vn_sprites['content'].hide()
+		if (showhide_action[1]) not in vn_sprites:
+			vn_sprites[showhide_action[1]]=find_child(showhide_action[1])
+		if showhide_action[0]=="_SHOW":
+			vn_sprites[showhide_action[1]].show()
+			#vn_sprites['animation_player'].play('witch_idle')
+		elif showhide_action[0]=="_HIDE":
+			#vn_sprites['animation_player'].stop()
+			vn_sprites[showhide_action[1]].hide()
 	if (((vn_position in vn_speaker_changes) and (animate_direction>-1))
 		or ((vn_position+1 in vn_speaker_changes) and (animate_direction==-1))
 		):
@@ -1009,17 +1210,27 @@ func animate_position(animate_direction):
 		if (animate_direction==-1):
 			vn_internal_speaker = full_speaker[1]
 			previous_speaker = full_speaker[0]
-		var local_speaker = tr('SPEAKER_'+vn_internal_speaker)
+		var local_speaker: String = tr('SPEAKER_'+vn_internal_speaker)
+		if local_speaker.count ('SPEAKER_') == 1+ (vn_internal_speaker.count('SPEAKER_')):
+			local_speaker = vn_internal_speaker
+			if vn_internal_speaker not in vn_characters:
+				pass
+			elif '$name' in vn_characters[vn_internal_speaker]:
+				var character_dictionary = vn_characters[vn_internal_speaker]
+				if '$name' in character_dictionary:
+					local_speaker = one_string_from_basic(character_dictionary['$name'], true)
 		if vn_internal_speaker in vn_characters:
 			var chosen_language = TranslationServer.get_locale()
 			var speaker_found = vn_characters[vn_internal_speaker]
-			if 'name'+'@'+chosen_language in speaker_found:
+			if '$name'+'@'+chosen_language in speaker_found:
 				local_speaker = speaker_found['name'+'@'+chosen_language]
-			elif ('name' in speaker_found) and (local_speaker.begins_with('SPEAKER_')):
-				local_speaker = speaker_found['name']
-			if ('deco_color' in speaker_found):
-				var colf = speaker_found['deco_color']
-				ui['vn_text_container'].material.set_shader_parameter('border_collie', colf)
+			elif ('$name' in speaker_found) and (local_speaker.begins_with('SPEAKER_')):
+				local_speaker = one_string_from_basic (speaker_found['$name'], true)
+			if (',border_collie' in speaker_found):
+				var colf_floats: PackedFloat32Array = floats_from_basic(speaker_found[',border_collie'])
+				if len(colf_floats)==3:
+					var colf = Vector3(colf_floats[0], colf_floats[1], colf_floats[2])
+					ui['vn_text_container'].material.set_shader_parameter('border_collie', colf)
 		if (((vn_internal_speaker=='') and (local_speaker=='SPEAKER_')) or
 				(local_speaker=='')):
 			##print ('Switching to \'none\' speaker')
@@ -1054,26 +1265,39 @@ func animate_position(animate_direction):
 			vn_position = current_label_stack[current_label_index][1]
 			current_label_index-=1
 	if vn_position in vn_choice_events:
-		print('make a choice? ', game_state)
+		#print('make a choice? ', game_state)
 		if (game_state=='GAME') or (game_state=='CHOICE_SUBGAME'):
 			var choice = vn_choice_events[vn_position]
 			create_choice_menu(vn_choices[choice])
-	var to_play = null
-	var play_backwards = false
+	var to_play: String = ''
+	var try_backwards = false
+	var player_to_use: String = ''
 	if (animate_direction==-1):
 		if vn_position<len(vn_text)-1:
 			if (vn_position+1) in vn_anim_dict:
-				to_play = vn_anim_dict[vn_position+1][2]
-				if vn_anim_dict[vn_position+1][0] in vn_reversible_animations:
-					to_play = vn_anim_dict[vn_position+1][0]
-					play_backwards = true
+				#print("Going back from ", vn_anim_dict[vn_position+1])
+				to_play = vn_anim_dict[vn_position+1][0]
+				player_to_use = vn_anim_dict[vn_position+1][2]
+				# TODO: replace backwards animation system
+				if vn_anim_dict[vn_position+1][0]:
+					#to_play = vn_anim_dict[vn_position+1][0]
+					try_backwards = true
 	if vn_position in vn_anim_dict:
-		to_play = vn_anim_dict[vn_position][0]
-	if to_play!=null:
-		if play_backwards:
-			ui['animation_camera'].play_backwards(to_play)
+		var animation_rule = vn_anim_dict[vn_position]
+		#print('position: ', vn_position)
+		#print(animation_rule)
+		to_play = animation_rule[0]
+		if to_play[0]=='"': to_play = to_play.substr(1)
+		player_to_use = animation_rule[2]
+		if player_to_use[0]=='"': player_to_use = player_to_use.substr(1)
+		try_backwards=false
+	if to_play!='':
+		if player_to_use[0]=='"': player_to_use = player_to_use.substr(1)
+		if to_play[0]=='"': to_play = to_play.substr(1)
+		if try_backwards and (0==find_child(player_to_use).get_animation(to_play).get_loop_mode()):
+			find_child(player_to_use).play_backwards(to_play)
 		else:
-			ui['animation_camera'].play(to_play)
+			find_child(player_to_use).play(to_play)
 	text_showing = vn_text[vn_position]
 	text_shown_amount = 0.0
 	if (animate_direction!=1):
@@ -1086,15 +1310,15 @@ func animate_position(animate_direction):
 		):
 		hide_menu(true)
 		## print('hiding the choice screen: ', text_showing)
-	if (text_showing!='') and (vn_position not in vn_text_linebreaks):
-		vn_text_linebreaks[vn_position]=get_string_linebreaks(text_showing,
-											text_box_width)
+	#if (text_showing!='') and (vn_position not in vn_text_linebreaks):
+	#	vn_text_linebreaks[vn_position]=get_string_linebreaks(text_showing,
+	#ad I'llad										text_box_width)
 		## print(text_showing)
 		## print('linebreaks: ', vn_text_linebreaks[vn_position])
 
 func maybe_stop_skipping():
 	if should_stop_skipping():
-		stop_skipping()
+		qm_set_toggle('skip', 0)
 
 func should_stop_skipping():
 	var chapter_status = vn_configuration['chapter:'+vn_chapter]
@@ -1115,7 +1339,7 @@ func go_forwards(allow_delay=true, skip_animation=false):
 		vn_position = 0
 		var previous_chapter_reference='chapter:'+vn_chapter
 		vn_configuration[previous_chapter_reference] = CHAPTER_ENDED
-		vn_chapter = null
+		vn_chapter = vn_first_chapter
 		#animate_position(1)
 		hide_menu()
 		show_menu()
@@ -1142,26 +1366,19 @@ func go_backwards():
 	animate_position(-1)
 	stop_highlighting()
 
-func toggle_skipping():
-	# XYZ: This function doesn't always get called
-	#  when the button gets clicked.
-	#  This might mean the engine thinks two single clicks
-	#  are one double click, but I can't find any
-	#  official explanation of it.
-	#  I hope to find a solution, but for now
-	#  all I can do here is document it.
-	if (input_skipping):
-		stop_skipping()
-	else:
-		start_skipping()
+func toggle_skipping_to(to_state: bool):
+	print('Toggle skipping to ', to_state)
+	qm_set_toggle('skip', int(to_state))
 	maybe_stop_skipping()
 
+func toggle_skipping():
+	qm_set_toggle('skip', -1)
+
 func toggle_auto():
-	input_autoing = not input_autoing
-	if (not input_autoing):
-		stop_autoing()
-	else:
-		stop_skipping()
+	qm_set_toggle('auto',-1)
+
+func toggle_auto_to(val: bool):
+	qm_set_toggle('auto',int(val))
 
 func toggle_selfvoice():
 	if vn_configuration['self_voicing']==1:
@@ -1172,26 +1389,12 @@ func toggle_selfvoice():
 		vn_configuration['self_voicing'] = 1
 	print("Toggled speech to "+str(vn_configuration['self_voicing']))
 
-func start_skipping():
-	input_skipping = true
-	###var skip_buttons = vn_running_buttons['skip']
-	#skip_buttons[0].texture_normal = skip_buttons[2]
-	stop_autoing()
-
-func stop_skipping():
-	input_skipping = false
-	###var skip_buttons = vn_running_buttons['skip']
-	#skip_buttons[0].texture_normal = skip_buttons[1]
-
-func stop_autoing():
-	input_autoing = false
-
 func handle_skipping(last_delay):
 	if (game_state!= 'GAME'):
-		stop_skipping()
+		qm_set_toggle('skip', 0)
 		return
 	# TODO: Handle text animation
-	if not (input_skipping or (Input.is_action_pressed("skip_active"))):
+	if not (qm_toggles['skip'] or (Input.is_action_pressed("skip_active"))):
 		return
 	if should_stop_skipping():
 		return
@@ -1202,10 +1405,10 @@ func handle_skipping(last_delay):
 
 func handle_auto(last_delay):
 	if (game_state!= 'GAME'):
-		stop_autoing()
-		return
+		qm_set_toggle('auto', 0)
+		return # TODO: Consider just pausing
 	# TODO: Handle text animation
-	if not input_autoing:
+	if not qm_toggles['auto']:
 		return
 	if next_auto_delay<0.0:
 		var fast_reading = float(len(text_showing))/vn_configuration['auto_cps']
@@ -1387,6 +1590,18 @@ func handle_focus(scroll_amount=0.0):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	handle_focus(delta)
+	if (game_state.ends_with('SCREEN')):
+		if (Input.is_action_just_pressed("ui_accept")):
+			print("Accepted a screen?")
+			var highlighted_line = vn_screen_text[vn_screen_highlight]
+			print(highlighted_line)
+			if '[url]' in (highlighted_line):
+				var url_with_end = highlighted_line.split('[url]')[1]
+				if '[/url]' in url_with_end:
+					var meta = url_with_end.split('[/url]')[0]
+					#print('This would open a URL:')
+					#print(meta)
+					OS.shell_open(str(meta))
 	handle_skipping(delta)
 	handle_auto(delta)
 	var mouse_just_undid = false
@@ -1413,7 +1628,7 @@ func _process(delta):
 		toggle_menu()
 	elif (Input.is_action_just_pressed("skip_toggle")):
 		if (game_state=="GAME"):
-			toggle_skipping()
+			qm_set_toggle('skip', -1)
 	elif (Input.is_action_just_pressed("accessibility_screen")):
 		create_accessibility_menu(true)
 	elif (Input.is_action_just_pressed("menu_voice")):
@@ -1425,25 +1640,10 @@ func _process(delta):
 
 func update_text():
 	var current_shown_length = floori(text_shown_amount)
-	var changed_text = text_showing
+	#var changed_text = text_showing
 	if ((vn_configuration['text_mode']=="CHARACTERS") and 
 			(vn_configuration['text_cps']>0)):
-		var check_linebreaks = int(floor(current_shown_length))
-		if ((check_linebreaks<(len(text_showing))) and
-			(vn_position in vn_text_linebreaks)
-			):
-			while (check_linebreaks>0):
-				if (len(vn_text_linebreaks[vn_position])==0):
-					break
-				if text_showing[check_linebreaks] == ' ':
-					var known_linebreaks = vn_text_linebreaks[vn_position]
-					#print(check_linebreaks, " ", vn_text_linebreaks[vn_position])
-					if check_linebreaks in known_linebreaks:
-						changed_text[check_linebreaks] = '\n'
-						##print('found linebreak')
-					break
-				check_linebreaks -= 1
-			#.get_wordwrap_string_size(extended_text, text_box_width)
+		pass
 	elif ((current_shown_length<len(text_showing)) and
 			(vn_configuration['text_mode']=="WORDS") and
 			vn_configuration['text_cps']>0):
@@ -1454,8 +1654,10 @@ func update_text():
 		var new_length = current_shown_length+0.1
 		if (text_shown_amount<new_length):
 			text_shown_amount=new_length
-	var text_shown = changed_text.substr(0, current_shown_length)
-	ui['vn_textbox'].text=text_shown
+	#var text_shown = changed_text.substr(0, current_shown_length)
+	ui['vn_textbox'].text=text_showing
+	var text_ratio = min(1.0, text_shown_amount/(ui['vn_textbox'].get_total_character_count()))
+	ui['vn_textbox'].visible_ratio = text_ratio
 
 func _input(event):
 	if event.is_action("mouse_undo"):
@@ -1466,7 +1668,6 @@ func _input(event):
 		input_vertical = 1
 	elif event.is_action_released("ui_up"):
 		input_vertical = 1
-
 
 func _on_screen_text_meta_clicked(meta):
 	OS.shell_open(str(meta))

@@ -9,6 +9,16 @@ msgstr "Project-Id-Version: Sheep Monologue 1.3\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+# Language names in all languages
+msgid "LANG_DA"
+msgstr "Danés"
+
+msgid "LANG_EN"
+msgstr "Inglés"
+
+msgid "LANG_ES"
+msgstr "Español"
+
 # MM is short for "main menu", used for main menu entries
 msgid "MM_CONTINUE"
 msgstr "Continuar"
@@ -137,3 +147,40 @@ msgstr "Acceder menú"
 
 msgid "VOICE_DECIMAL_POINT"
 msgstr "coma"
+
+# SN: Screen names (read aloud when viewing a menu in self-voicing mode)
+msgid "SN_MAIN"
+msgstr "Menú principal"
+
+msgid "SN_INGAME"
+msgstr "Menú de pausa"
+
+msgid "SN_LANGUAGE"
+msgstr "Menú de idiomas"
+
+msgid "SN_LOAD"
+msgstr "Menú de carga"
+
+msgid "SN_CHOICE"
+msgstr "Decisión en el juego"
+
+msgid "SN_ACCESSIBILITY"
+msgstr "Menú de accesibilidad"
+
+msgid "SN_SOUND"
+msgstr "Menú de sonido"
+
+msgid "SN_TEXT"
+msgstr "Menú de texto"
+
+msgid "SN_SETTINGS"
+msgstr "Menú de configuración"
+
+msgid "SN_CREDITS"
+msgstr "Pantalla de créditos"
+
+msgid "SN_HELP"
+msgstr "Pantalla de ayduda"
+
+msgid "SN_HISTORY"
+msgstr "Historial"

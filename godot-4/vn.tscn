@@ -23,7 +23,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("sprites/Node2D/Sparkle:position")
+tracks/0/path = NodePath("sprites/sprite_content/Sparkle:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -35,7 +35,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("sprites/Node2D/Sparkle:scale")
+tracks/1/path = NodePath("sprites/sprite_content/Sparkle:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -47,7 +47,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("sprites/Node2D/Sparkle2:position")
+tracks/2/path = NodePath("sprites/sprite_content/Sparkle2:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -59,7 +59,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("sprites/Node2D/Sparkle2:scale")
+tracks/3/path = NodePath("sprites/sprite_content/Sparkle2:scale")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -71,7 +71,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("sprites/Node2D/Sparkle3:position")
+tracks/4/path = NodePath("sprites/sprite_content/Sparkle3:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -83,7 +83,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("sprites/Node2D/Sparkle3:scale")
+tracks/5/path = NodePath("sprites/sprite_content/Sparkle3:scale")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -100,7 +100,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("sprites/Node2D/Sparkle:position")
+tracks/0/path = NodePath("sprites/sprite_content/Sparkle:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -112,7 +112,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("sprites/Node2D/Sparkle:scale")
+tracks/1/path = NodePath("sprites/sprite_content/Sparkle:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -124,7 +124,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("sprites/Node2D/Sparkle2:position")
+tracks/2/path = NodePath("sprites/sprite_content/Sparkle2:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -136,7 +136,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("sprites/Node2D/Sparkle2:scale")
+tracks/3/path = NodePath("sprites/sprite_content/Sparkle2:scale")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -148,7 +148,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("sprites/Node2D/Sparkle3:position")
+tracks/4/path = NodePath("sprites/sprite_content/Sparkle3:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -160,7 +160,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("sprites/Node2D/Sparkle3:scale")
+tracks/5/path = NodePath("sprites/sprite_content/Sparkle3:scale")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -265,7 +265,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(0, -180), Vector2(0, 525)]
+"values": [Vector2(0, -500), Vector2(0, 525)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -356,7 +356,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(0, 525), Vector2(0, -180)]
+"values": [Vector2(0, 525), Vector2(0, -500)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -418,33 +418,33 @@ libraries = {
 "": SubResource("AnimationLibrary_wba5e")
 }
 
-[node name="Node2D" type="Node2D" parent="landskab/sprites"]
+[node name="sprite_content" type="Node2D" parent="landskab/sprites"]
 position = Vector2(0, -220)
 
-[node name="shadow" type="Sprite2D" parent="landskab/sprites/Node2D"]
+[node name="shadow" type="Sprite2D" parent="landskab/sprites/sprite_content"]
 position = Vector2(111.75, 530.75)
 scale = Vector2(1.17598, 1.35185)
 texture = ExtResource("4_i132e")
 
-[node name="shadow2" type="Sprite2D" parent="landskab/sprites/Node2D"]
+[node name="shadow2" type="Sprite2D" parent="landskab/sprites/sprite_content"]
 position = Vector2(-193.625, 536.125)
 scale = Vector2(0.844972, 1.04012)
 texture = ExtResource("4_i132e")
 
-[node name="Sparkle3" type="Sprite2D" parent="landskab/sprites/Node2D"]
+[node name="Sparkle3" type="Sprite2D" parent="landskab/sprites/sprite_content"]
 position = Vector2(290.5, 136)
 scale = Vector2(0.84375, 0.75)
 texture = ExtResource("5_uab2r")
 
-[node name="witch_sprite" type="Sprite2D" parent="landskab/sprites/Node2D"]
+[node name="witch_sprite" type="Sprite2D" parent="landskab/sprites/sprite_content"]
 position = Vector2(43, -4)
 texture = ExtResource("6_o60si")
 
-[node name="Sparkle" type="Sprite2D" parent="landskab/sprites/Node2D"]
+[node name="Sparkle" type="Sprite2D" parent="landskab/sprites/sprite_content"]
 position = Vector2(280, 164)
 texture = ExtResource("5_uab2r")
 
-[node name="Sparkle2" type="Sprite2D" parent="landskab/sprites/Node2D"]
+[node name="Sparkle2" type="Sprite2D" parent="landskab/sprites/sprite_content"]
 position = Vector2(246.5, 144)
 scale = Vector2(1.21875, 1.375)
 texture = ExtResource("5_uab2r")

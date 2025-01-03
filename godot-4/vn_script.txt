@@ -1,99 +1,124 @@
-@rem Copyright (c) 2023 Lars Rune Præstmark (or "SeaLiteral" as I call myself on some websites)
-@rem 
-@rem Permission is hereby granted, free of charge, to any person obtaining a copy
-@rem of this software and associated documentation files (the "Software"), to deal
-@rem in the Software without restriction, including without limitation the rights
-@rem to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-@rem copies of the Software, and to permit persons to whom the Software is
-@rem furnished to do so, subject to the following conditions:
-@rem 
-@rem The above copyright notice and this permission notice shall be included in all
-@rem copies or substantial portions of the Software.
-@rem 
-@rem THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-@rem IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-@rem FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-@rem AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-@rem LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-@rem OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-@rem SOFTWARE.
+REM Copyright (c) 2023 Lars Rune Præstmark (or "SeaLiteral" as I call myself on some websites)
+REM 
+REM Permission is hereby granted, free of charge, to any person obtaining a copy
+REM of this software and associated documentation files (the "Software"), to deal
+REM in the Software without restriction, including without limitation the rights
+REM to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+REM copies of the Software, and to permit persons to whom the Software is
+REM furnished to do so, subject to the following conditions:
+REM 
+REM The above copyright notice and this permission notice shall be included in all
+REM copies or substantial portions of the Software.
+REM 
+REM THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+REM IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+REM FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+REM AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+REM LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+REM OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+REM SOFTWARE.
 
-@start choice left_or_right
-	@start option
-		set text@en "Left"
-		set text@da "Venstre"
-		set text@es "El izquierdo"
-		set action goto go_left
-	@end option
-	@start option
-		set text@en "Right"
-		set text@da "Højre"
-		set text@es "El derecho"
-		set action goto go_right
-	@end option
-@end choice
+CHARACTER @Wiwe IS
+	HAS $name "Wiwe"
+	HAS ,border_collie { 0.369 0.212 0.490 }
+CHAREND
 
-@start character Vibe
-set name "Vibe"
-set name@es "Avefría"
-set deco_color 0.369 0.212 0.490
-@end character
+REM FOLLOW ANIMATION camera_up WITH camera_idle
+REM FOLLOW ANIMATION camera_down WITH camera_liedown
+REM FOLLOW ANIMATION camera_chomp WITH camera_idle
 
-@chapter intro
-@hide sprite
-@anim camera_idle
+CHAPTER intro
+HIDE sprite_content
+ANIMATE "camera_animation_player" "camera_idle"
 
-@show sprite
-@rem @speaker Vibe
-en=Hi! This is a test. And apparently it's working.
-da=Hej! Dette er en prøve. Og det lader til at den virker.
-es=¡Hola! Esto es una prueba. Y parece que funciona.
+SHOW sprite_content
+REM SPEAKER Vibe
+=en=Hi! This is a test. And apparently it's working.
+=da=Hej! Dette er en prøve. Og det lader til at den virker.
+=es=¡Hola! Esto es una prueba. Y parece que funciona.
 
-en=Vibe::There's enough configuration wizards out there. Here's a default settings witch!
-da=Vibe::Brugte man computere i middelalderen havde man nok fået en trold-dom. Det sker heldigvis ikke mere.
-es=Vibe::Los ordenadores parecen brujería. Me encantan.
+REM character names are case-sensitive!
+ANIMATE "camera_animation_player" "camera_down"
+SPEAKER @Wiwe
+=en=I gave my textbox a purple border.
+   That way you can tell who's speaking.
+=da=Når jeg taler, så er kassen lilla.
+   Og når Gabe taler, er den rød.
+=es=Cuando hablo yo, el rectángulo es morado.
+   Y cuando habla Gabe, es rojo.
 
-en=Do you think I should be in the left or right side of the screen?
-da=Mener du at jeg bør være i højre eller venstre side af skærmen?
-es=¿Te parece que debo estar en el lado derecho o izquierdo de la pantalla?
+=en=There's enough configuration wizards out there. Here's a default settings witch!
+=da=Brugte man computere i middelalderen havde man nok fået en trold-dom. Det sker heldigvis ikke mere.
+=es=Los ordenadores parecen brujería. Me encantan.
 
-@choice left_or_right
+=en=blank 1
+=da=blank 1
+=es=en blanco 1
 
-@label go_left
-en=Nice! You realised I was left-handed.
-da=Fint! Du opdagede jeg var venstrehåndet.
-es=¡Bien! Te fijaste que soy zurda.
+=en=blank 2
+=da=blank 2
+=es=en blanco 2
 
-en=Let me move the camera...
-da=Lad mig lige bevæge kameraet...
-es=A ver si puedo mover la cámara...
+ANIMATE "camera_animation_player" "camera_up"
+=en=Do you think I should be in the left or right side of the screen?
+=da=Mener du at jeg bør være i højre eller venstre side af skærmen?
+=es=¿Te parece que debo estar en el lado derecho o izquierdo de la pantalla?
 
-@anim camera_chomp
+=en=blank 3
+=da=blank 3
+=es=en blanco 3
 
-en=Wow! It worked. I guess I've figured this out.
-da=Wow! Det virkede! Jeg tror jeg har styr på det.
-es=¡Vaya! Funciona. Creo que lo tengo bajo control
+CHOICE DO
+	OPTION IS
+		HAS $text "Left"
+		HAS action GOTO go_left
+	OPTEND
+	OPTION IS
+		HAS $text "Right"
+		HAS action GOTO go_right
+	OPTEND
+CHOICEEND
 
-@rem the Spanish translation has three syllables more in the second line
-@chapter otherchapter
-@anim camera_idle
-@show sprite
-en=I can do a lot,
+LABEL go_left
+=en=Nice! You realised I was left-handed.
+=da=Fint! Du opdagede jeg var venstrehåndet.
+=es=¡Bien! Te fijaste que soy zurda.
+
+=en=Let me move the camera...
+=da=Lad mig lige bevæge kameraet...
+=es=A ver si puedo mover la cámara...
+
+ANIMATE "camera_animation_player" "camera_chomp"
+
+=en=Wow! It worked. I guess I've figured this out.
+=da=Wow! Det virkede! Jeg tror jeg har styr på det.
+=es=¡Vaya! Funciona. Creo que lo tengo bajo control
+
+REM the Spanish translation has three syllables more in the second line
+CHAPTER otherchapter
+ANIMATE "camera_animation_player" "camera_idle"
+SHOW sprite_content
+=en=I can do a lot,
    with the stuff I've got.
-da=Jeg kan gøre en masse
+=da=Jeg kan gøre en masse
    med min værktøjskasse.
-es=Son muchas las cosas que puedo
+=es=Son muchas las cosas que puedo
    hacer con las cosas que tengo.
 
-en=Okay, that came out better in some languages than others.
-da=Okay, det fungerede ikke lige godt på alle sprog.
-es=Vaya, esto no funcionó igual de bien en los tres idiomas.
+=en=Okay, that came out better in some languages than others.
+=da=Okay, det fungerede ikke lige godt på alle sprog.
+=es=Vaya, esto no funcionó igual de bien en los tres idiomas.
 
-@label go_right
-en=Look at my wand. Why do you think I'm holding it in the left hand?
-da=Se min tryllestav. Hvorfor mon jeg holder den i venstre hånd?
-es=Mira mi varita. ¿Por qué crees que la tengo en la mano izquierda?
+GOTO last_line
 
-en=Well, I guess I don't have much else to show. Bye!
-da=Nå, jeg tror ikke jeg har meget andet at vise. Farvel!
-es=Bueno, no creo que tenga mucho más que mostrar. ¡Adiós!
+LABEL go_right
+=en=Look at my wand. Why do you think I'm holding it in the left hand?
+=da=Se min tryllestav. Hvorfor mon jeg holder den i venstre hånd?
+=es=Mira mi varita. ¿Por qué crees que la tengo en la mano izquierda?
+
+LABEL last_line
+=en=Well, I guess I don't have much else to show. Bye!
+=da=Nå, jeg tror ikke jeg har meget andet at vise. Farvel!
+=es=Bueno, no creo que tenga mucho más que mostrar. ¡Adiós!
+
+LEAVESTORY
